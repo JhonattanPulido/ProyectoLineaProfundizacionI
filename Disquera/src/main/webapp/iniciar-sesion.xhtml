@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
 
         <title>Disquera SJ | Iniciar sesión</title>
@@ -15,7 +16,7 @@
         <link rel="stylesheet" href="assets/css/owl.css" />
 
     </h:head>
-    <h:body>
+    <h:body style="background-color: #eaeaea;">
 
         <!-- ***** Preloader Start ***** -->
         <div id="preloader">
@@ -27,40 +28,43 @@
         </div>  
         <!-- ***** Preloader End ***** -->       
 
-        <!--<div class="send-message">
+        <div class="send-message" style="width: 480px; margin: 0 auto; margin-top: 240px; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="section-heading">
+                        <div class="section-heading" style="margin-bottom: 30px">
                             <h2>Iniciar sesión</h2>
                         </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="contact-form">
-                            <form id="contact" action="" method="post">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <fieldset>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="Nombre de usuario" required="true" />
-                                        </fieldset>
-                                    </div>                                    
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <fieldset>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="Clave" required="true" />
-                                        </fieldset>
+                        <div>
+                            <div class="contact-form">
+                                <h:form id="inicio-sesion">
+                                    
+                                    <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <fieldset>
+                                                <p:inputText id="nombre-usuario" class="form-control" value="#{iniciarSesionController.iniciarSesion.nombreUsuario}" placeholder="Nombre de usuario" style="box-shadow: none;" autocomplete="off" />
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <fieldset>
+                                                <p:password id="clave" class="form-control" value="#{iniciarSesionController.iniciarSesion.clave}" placeholder="Clave" style="box-shadow: none;" />
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <fieldset>
+                                                <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{iniciarSesionController.validarUsuario()}" value="Iniciar sesión" validateClient="true" />
+                                            </fieldset>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-12">
-                                        <fieldset>
-                                            <button type="submit" id="form-submit" class="filled-button">Iniciar sesión</button>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </form>
+                                </h:form>
+                            </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
-        </div>-->
+        </div>                
 
         <!-- Bootstrap core JavaScript -->
         <script src="vendor/jquery/jquery.min.js"></script>
@@ -83,9 +87,20 @@
                     t.value = '';         // with more chance of typos
                     t.style.color = '#fff';
                 }
-            }
+            }                        
         </script>
 
+        <script type="text/javascript">
+            window.addEventListener('load', _ => {
+                const botonSubmit = document.getElementById('inicio-sesion:boton-submit');
+                botonSubmit.classList.remove('ui-button');
+                botonSubmit.classList.remove('ui-widget');
+                botonSubmit.classList.remove('ui-state-default');
+                botonSubmit.classList.remove('ui-corner-all');
+                botonSubmit.classList.remove('ui-button-text-only');                                                
+                botonSubmit.classList.remove('ui-state-hover');    
+            }, false);
+        </script>
     </h:body>
 </html>
 
