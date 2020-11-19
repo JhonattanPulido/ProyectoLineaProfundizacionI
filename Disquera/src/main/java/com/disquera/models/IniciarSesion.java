@@ -18,7 +18,7 @@ public class IniciarSesion implements Serializable {
     /**
      * Nombre de usuario del usuario
      */       
-    @Size(min=8, max=16, message = "Nombre de usuario: Debe tener mínimo 8 y máximo 16 caracteres")
+    @Size(min=8, max=25, message = "Nombre de usuario: Debe tener mínimo 8 y máximo 25 caracteres")
     private String nombreUsuario;
     
     /**

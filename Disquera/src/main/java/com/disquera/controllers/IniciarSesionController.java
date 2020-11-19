@@ -1,11 +1,12 @@
 // Paquetes
 package com.disquera.controllers;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.IniciarSesion;
 
 // Librerías
 import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 
 /**
  * Controlador de la página de inicio de sesión
@@ -14,7 +15,7 @@ import javax.enterprise.context.SessionScoped;
  * @since 16/11/2020
  */
 @Named(value = "iniciarSesionController")
-@SessionScoped
+@RequestScoped
 public class IniciarSesionController implements Serializable {
 
     // Variables
@@ -22,7 +23,7 @@ public class IniciarSesionController implements Serializable {
     /**
      * Variable que almacena los datos necesarios para iniciar sesión
      */
-    private IniciarSesion iniciarSesion;
+    private IniciarSesion iniciarSesion;        
     
     /**
      * Constructor
@@ -35,7 +36,11 @@ public class IniciarSesionController implements Serializable {
     // Métodos
     public void validarUsuario() {
     
-        System.out.println(iniciarSesion.getNombreUsuario() + " - " + iniciarSesion.getClave());
+        if (new LIniciarSesion().iniciarSesion(iniciarSesion) == true) {
+            System.out.println("Correcto");
+        } else {
+            System.out.println("Incorrecto");
+        }
     }    
     
     // Métodos Set & Get
