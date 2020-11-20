@@ -62,7 +62,7 @@ public class IniciarSesionController implements Serializable {
                         .getSessionMap().get("GqyZDngHH2");                        
             
             if (usuario.getRolId() == 1)
-                facesContext.getExternalContext().redirect("faces/security/administrador/artistas.xhtml");
+                facesContext.getExternalContext().redirect("faces/security/administrador/admin-artistas.xhtml");
             else
                 facesContext.getExternalContext().redirect("faces/security/comprador/albumes.xhtml");
             

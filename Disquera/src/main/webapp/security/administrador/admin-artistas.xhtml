@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
         <title>Disquera SJ | Artistas</title>
@@ -28,7 +30,7 @@
         <!-- ***** Preloader End ***** -->  
 
         <!-- Header -->
-        <header class="">
+        <header class="" style="position: relative !important;">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="index.html"><h2>Disquera <em>SJ</em></h2></a>
@@ -68,7 +70,7 @@
             </div>
         </div>
 
-        <div class="products">
+        <!--<div class="products">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -168,6 +170,87 @@
                             </div>
                         </div>
                     </div>                    
+                </div>
+            </div>
+        </div>-->
+
+        <div class="products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filters">
+                            <ul>
+                                <li class="active">Crear artista</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="inicio-sesion" enctype="multipart/form-data">
+
+                                                <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:inputText id="nombre" class="form-control" value="#{artistasAdministradorController.artista.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" />
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>                                                            
+
+                                                            <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+                                                                <p:outputLabel for="nacionalidad" value="Nacionalidad:" />
+                                                                <p:selectOneRadio id="nacionalidad" value="#{artistasAdministradorController.artista.nacionalidad}" unselectable="false" required="true">
+                                                                    <f:selectItem itemLabel="Colombiana" itemValue="Colombiana" />
+                                                                    <f:selectItem itemLabel="Mexicana" itemValue="Mexicana" />
+                                                                    <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
+                                                                    <f:selectItem itemLabel="Española" itemValue="Española" />
+                                                                    <f:selectItem itemLabel="Francesa" itemValue="Francesa" />
+                                                                    <f:selectItem itemLabel="Estadounidense" itemValue="Estadounidense" />
+                                                                </p:selectOneRadio>
+                                                            </h:panelGrid>
+
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:inputText id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true">  
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                            </p:inputText>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:outputLabel for="genero-id" value="Género musical:" />
+                                                            <p:selectOneRadio id="genero-id" value="#{artistasAdministradorController.artista.generoId}" layout="responsive" columns="3" required="true">
+                                                                <f:selectItems value="#{artistasAdministradorController.listaGeneros}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
+                                                            </p:selectOneRadio>
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:outputLabel for="imagen" value="Imagen: " style="display: block;" />
+                                                            <p:fileUpload id="imagen" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+                                                        </fieldset>
+                                                    </div>                                                    
+                                                    <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
+                                                        <fieldset>
+                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{artistasAdministradorController.crearArtista()}" value="Guardar" validateClient="true" />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>
