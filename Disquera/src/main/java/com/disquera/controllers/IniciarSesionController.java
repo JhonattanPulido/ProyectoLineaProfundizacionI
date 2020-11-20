@@ -1,11 +1,17 @@
 // Paquetes
 package com.disquera.controllers;
 import com.disquera.logic.LIniciarSesion;
+
+// Modelos
 import com.disquera.models.IniciarSesion;
+import com.disquera.models.Usuario;
+import java.io.IOException;
 
 // Librerías
 import java.io.Serializable;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
@@ -15,7 +21,7 @@ import javax.inject.Named;
  * @since 16/11/2020
  */
 @Named(value = "iniciarSesionController")
-@RequestScoped
+@ViewScoped
 public class IniciarSesionController implements Serializable {
 
     // Variables
@@ -23,25 +29,48 @@ public class IniciarSesionController implements Serializable {
     /**
      * Variable que almacena los datos necesarios para iniciar sesión
      */
-    private IniciarSesion iniciarSesion;        
+    private IniciarSesion iniciarSesion;     
+    
+    /**
+     * Almacena los datos de el usuario que inició sesión
+     */
+    private Usuario usuario;
+    
+    /**
+     * Faces context
+     */
+    private FacesContext facesContext;
     
     /**
      * Constructor
      */
     public IniciarSesionController() {
         
-        iniciarSesion = new IniciarSesion();
+        iniciarSesion = new IniciarSesion();        
     }
     
     // Métodos
-    public void validarUsuario() {
+    public void validarUsuario() throws IOException {
     
+        facesContext = FacesContext.getCurrentInstance();
+        
         if (new LIniciarSesion().iniciarSesion(iniciarSesion) == true) {
-            System.out.println("Correcto");
-        } else {
-            System.out.println("Incorrecto");
-        }
-    }    
+                                    
+            iniciarSesion.setClave(null); // Seguridad
+            
+            usuario = (Usuario) facesContext.getExternalContext()
+                        .getSessionMap().get("GqyZDngHH2");                        
+            
+            if (usuario.getRolId() == 1)
+                facesContext.getExternalContext().redirect("faces/security/administrador/artistas.xhtml");
+            else
+                facesContext.getExternalContext().redirect("faces/security/comprador/albumes.xhtml");
+            
+        } else
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario y / o clave incorrectos"));
+    }
+    
+    // Métodos       
     
     // Métodos Set & Get
 

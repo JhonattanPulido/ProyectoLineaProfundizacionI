@@ -6,6 +6,9 @@ import com.disquera.data.DIniciarSesion;
 import com.disquera.models.IniciarSesion;
 import com.disquera.models.Usuario;
 
+// Librerías
+import javax.faces.context.FacesContext;
+
 /**
  * Capa lógica de inicio de sesión
  * @author Sandra Moreno - Jhonattan Pulido
@@ -21,6 +24,11 @@ public class LIniciarSesion {
      */
     private Usuario usuario;
     
+    /**
+     * Faces context
+     */
+    private FacesContext facesContext;
+    
     // Constructor
     public LIniciarSesion() {
         
@@ -35,7 +43,10 @@ public class LIniciarSesion {
     
         usuario = new DIniciarSesion().iniciarSesion(datos);
         
-        // Guardar datos de usuario en el mapa
+        if (usuario != null) {            
+            facesContext = FacesContext.getCurrentInstance();
+            facesContext.getExternalContext().getSessionMap().put("GqyZDngHH2", usuario);
+        }
         
         return usuario != null;
     }

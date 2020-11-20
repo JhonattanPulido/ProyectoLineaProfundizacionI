@@ -79,7 +79,7 @@ public class DIniciarSesion {
             
             return usuario;
             
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {                  
             return null;
         }
     }
