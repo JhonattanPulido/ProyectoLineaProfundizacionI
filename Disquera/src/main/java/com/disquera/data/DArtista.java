@@ -75,18 +75,19 @@ public class DArtista implements Serializable {
                 "LCPzVCxRrZtS2BS"    
             );
             
-            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_artista(?,?,?,?,?) }");
+            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_artista(?,?,?,?) }");
             funcion.setString(1, artista.getNombre());
-            funcion.setString(2, artista.getNacionalidad());  
-            funcion.setDate(3, artista.getFechaNacimiento());  
-            funcion.setShort(4, artista.getGeneroId());
-            funcion.setString(5, artista.getImagen());
+            funcion.setString(2, artista.getNacionalidad());              
+            //funcion.setDate(3, new java.sql.Date(artista.getFechaNacimiento().getTime()));               
+            funcion.setShort(3, artista.getGeneroId());
+            funcion.setBytes(4, artista.getImagen());            
             
             ResultSet respuesta = funcion.executeQuery();                        
             
-            return respuesta.getBoolean(0);
+            return true;
             
-        } catch (SQLException ex) {        
+        } catch (SQLException ex) {   
+            System.out.println("ERROR :" + ex);
             return false;
         }
     }
@@ -121,7 +122,7 @@ public class DArtista implements Serializable {
             
                 artista = new Artista();                
                 artista.setId(respuesta.getShort("id"));
-                artista.setImagen(respuesta.getString("imagen"));
+                artista.setImagen(respuesta.getBytes("imagen"));
                 artista.setNombre(respuesta.getString("nombre"));
                 artista.setNacionalidad(respuesta.getString("nacionalidad"));
                 artista.setFechaNacimiento(respuesta.getDate("fecha_nacimiento"));                
@@ -172,7 +173,7 @@ public class DArtista implements Serializable {
                 
                 artista = new Artista();                
                 artista.setId(respuesta.getShort("id"));
-                artista.setImagen(respuesta.getString("imagen"));
+                artista.setImagen(respuesta.getBytes("imagen"));
                 artista.setNombre(respuesta.getString("nombre"));
                 artista.setNacionalidad(respuesta.getString("nacionalidad"));
                 artista.setFechaNacimiento(respuesta.getDate("fecha_nacimiento"));                
@@ -217,7 +218,7 @@ public class DArtista implements Serializable {
             funcion.setString(2, artista.getNacionalidad());  
             funcion.setDate(3, artista.getFechaNacimiento());  
             funcion.setShort(4, artista.getGeneroId());
-            funcion.setString(5, artista.getImagen());
+            funcion.setBytes(5, artista.getImagen());
             
             ResultSet respuesta = funcion.executeQuery();                        
             

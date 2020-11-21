@@ -2,9 +2,16 @@
 package com.disquera.controllers;
 
 // Modelos
+import com.disquera.logic.LArtista;
 import com.disquera.logic.LGenero;
 import com.disquera.models.Artista;
 import com.disquera.models.Genero;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 // Librerías
 import java.io.Serializable;
@@ -12,6 +19,7 @@ import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.imageio.ImageIO;
 import org.primefaces.model.file.UploadedFile;
 
 /**
@@ -63,13 +71,29 @@ public class ArtistasAdministradorController implements Serializable {
      */
     public void crearArtista() {
     
-        System.out.println(artista.getNacionalidad());
+        // Subiendo imagen
         
-        /*if (new LArtista().crearArtista(artista))
-            System.out.println("Creado");
-        else
-            System.out.println("No creado");*/
-    }
+        try { 
+        
+            InputStream inputStream = imagen.getInputStream();
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            
+            for (int i = 0; (i = inputStream.read(buffer)) > 0;) {
+                output.write(buffer, 0, i);
+            }                        
+            
+            artista.setImagen(output.toByteArray());                        
+            
+            if (new LArtista().crearArtista(artista))
+                System.out.println("Creado");
+            else
+                System.out.println("No creado");
+            
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }                                               
+    }        
     
     // Métodos Set & Get
 

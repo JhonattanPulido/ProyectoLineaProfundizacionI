@@ -217,13 +217,13 @@
 
                                                         </fieldset>
                                                     </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <!--<div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:inputText id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true">  
-                                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                            <p:inputText id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true">
+                                                                <f:convertDateTime pattern="MM/dd/yyyy" />
                                                             </p:inputText>
                                                         </fieldset>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
                                                             <p:outputLabel for="genero-id" value="Género musical:" />
@@ -234,13 +234,13 @@
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:outputLabel for="imagen" value="Imagen: " style="display: block;" />
-                                                            <p:fileUpload id="imagen" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" />
+                                                            <p:outputLabel for="imagen" value="Imagen: " style="display: block;" />                                                            
+                                                            <p:fileUpload id="imagen" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true"/>
                                                         </fieldset>
                                                     </div>                                                    
                                                     <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
                                                         <fieldset>
-                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{artistasAdministradorController.crearArtista()}" value="Guardar" validateClient="true" />
+                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form" action="#{artistasAdministradorController.crearArtista()}" value="Guardar" validateClient="true" ajax="false" />
                                                         </fieldset>
                                                     </div>
                                                 </div>

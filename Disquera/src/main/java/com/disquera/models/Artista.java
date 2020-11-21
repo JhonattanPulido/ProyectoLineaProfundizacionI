@@ -25,7 +25,7 @@ public class Artista implements Serializable {
     /**
      * Nombre del artista
      */
-    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,20}", message = "Nombre: Debe tener mínimo 2 y máximo 20 letras")
+    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}", message = "Nombre: Debe tener mínimo 2 y máximo 20 letras")
     private String nombre;
     
     /**
@@ -52,7 +52,7 @@ public class Artista implements Serializable {
     /**
      * Imagen del artista
      */
-    private String imagen;
+    private byte[] imagen;
     
     /**
      * Constructor de la clase
@@ -113,11 +113,11 @@ public class Artista implements Serializable {
         this.genero = genero;
     }    
 
-    public String getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }   
 }
