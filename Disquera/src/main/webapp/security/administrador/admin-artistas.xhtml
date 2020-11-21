@@ -70,110 +70,109 @@
             </div>
         </div>
 
-        <!--<div class="products">
+        <div class="products">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="filters">
                             <ul>
-                                <li class="active">Todos los artistas</li>                                
+                                <li class="active">Artistas</li>                                
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="filters-content">
-                            <div class="row grid">
-                                <div class="col-lg-4 col-md-4 all des">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_01.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (12)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 all dev">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_02.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (24)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 all gra">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_03.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (36)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 all gra">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_04.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (48)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 all dev">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_05.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (60)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 all des">
-                                    <div class="product-item">
-                                        <a href="#"><img src="../assets/images/product_06.jpg" alt="" /></a>
-                                        <div class="down-content">
-                                            <a href="#"><h4>Nombre del artista</h4></a>
-                                            <h6>Género musical</h6>
-                                            <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                            <ul class="stars">
-                                                <li><i class="fa fa-microphone"></i></li>
-                                            </ul>
-                                            <span>Reviews (72)</span>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="lista-artistas">
+                                                
+                                                <p:growl id="growl" showDetail="true" sticky="true" /> 
+
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:dataTable id="cars1" var="artista" value="#{artistasAdministradorController.listaArtistas}" editable="true" style="margin-bottom:20px"
+                                                                         rows="10"
+                                                                        paginator="true"
+                                                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                        currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                                                        rowsPerPageTemplate="5,10,15"
+                                                                        emptyMessage="No cars found with given criteria" filteredValue="#{dtFilterView.filteredCars2}"
+                                                                        globalFilterFunction="#{dtFilterView.globalFilterFunction}">
+                                                                <f:facet name="header">
+                                                                    Artistas
+                                                                </f:facet>
+
+                                                                <p:ajax event="rowEdit" listener="#{artistasAdministradorController.onRowEdit}" update=":lista-artistas:growl" />
+                                                                <p:ajax event="rowEditCancel" listener="#{artistasAdministradorController.onRowCancel}" update=":lista-artistas:growl" />
+
+                                                                <p:column headerText="Id">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{artista.id}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText id="modelInput" value="#{artista.id}" style="width:100%" disabled="true"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+
+                                                                <p:column headerText="Nombre">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{artista.nombre}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{artista.nombre}" style="width:100%" label="Year"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+
+                                                                <p:column headerText="Género musical">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{artista.genero.nombre}" /></f:facet>
+                                                                        <f:facet name="input">
+                                                                            <h:selectOneMenu value="#{artista.generoId}" style="width:100%">
+                                                                                <f:selectItems value="#{artistasAdministradorController.listaGeneros}" var="man" itemLabel="#{man.nombre}" itemValue="#{man.id}" />
+                                                                            </h:selectOneMenu>
+                                                                        </f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+                                                                
+                                                                <p:column headerText="Nacionalidad">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{artista.nacionalidad}" /></f:facet>
+                                                                        <f:facet name="input">
+                                                                            <h:selectOneMenu value="#{artista.nacionalidad}" style="width:100%">
+                                                                                <f:selectItems value="#{artistasAdministradorController.listaNacionalidades}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                                                            </h:selectOneMenu>
+                                                                        </f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+
+                                                                <p:column headerText="Imagen">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output">
+                                                                            <img src="../../#{artista.imagen}" width="190px" height="120px" />
+                                                                        </f:facet>
+                                                                        <f:facet name="input">
+                                                                            <f:facet name="input"><p:inputText value="#{artista.nombre}" style="width:100%" label="Year"/></f:facet>
+                                                                        </f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+
+                                                                <p:column style="width:35px">
+                                                                    <p:rowEditor />
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </h:form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
-        </div>-->
-
+        </div>
+        
         <div class="products">
             <div class="container">
                 <div class="row">
@@ -201,20 +200,16 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>                                                            
-
-                                                            <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
-                                                                <p:outputLabel for="nacionalidad" value="Nacionalidad:" />
-                                                                <p:selectOneRadio id="nacionalidad" value="#{artistasAdministradorController.artista.nacionalidad}" unselectable="false" required="true">
-                                                                    <f:selectItem itemLabel="Colombiana" itemValue="Colombiana" />
-                                                                    <f:selectItem itemLabel="Mexicana" itemValue="Mexicana" />
-                                                                    <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
-                                                                    <f:selectItem itemLabel="Española" itemValue="Española" />
-                                                                    <f:selectItem itemLabel="Francesa" itemValue="Francesa" />
-                                                                    <f:selectItem itemLabel="Estadounidense" itemValue="Estadounidense" />
-                                                                </p:selectOneRadio>
-                                                            </h:panelGrid>
-
+                                                        <fieldset>                                                                                                                        
+                                                            <p:outputLabel for="nacionalidad" value="Nacionalidad:" />
+                                                            <p:selectOneRadio id="nacionalidad" value="#{artistasAdministradorController.artista.nacionalidad}" unselectable="false" layout="responsive" columns="3" required="true">
+                                                                <f:selectItem itemLabel="Colombiana" itemValue="Colombiana" />
+                                                                <f:selectItem itemLabel="Mexicana" itemValue="Mexicana" />
+                                                                <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
+                                                                <f:selectItem itemLabel="Española" itemValue="Española" />
+                                                                <f:selectItem itemLabel="Francesa" itemValue="Francesa" />
+                                                                <f:selectItem itemLabel="Estadounidense" itemValue="Estadounidense" />
+                                                            </p:selectOneRadio>                                                            
                                                         </fieldset>
                                                     </div>
                                                     <!--<div class="col-lg-12 col-md-12 col-sm-12">

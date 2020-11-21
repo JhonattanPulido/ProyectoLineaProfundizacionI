@@ -18,6 +18,11 @@ public class LArtista implements Serializable {
     // Variables
     
     /**
+     * Lista que almacena los artistas
+     */
+    private List<Artista> listaArtistas;
+    
+    /**
      * Constructor de la clase
      */
     public LArtista() {
@@ -40,7 +45,14 @@ public class LArtista implements Serializable {
      * @return lista de artistas
      */
     public List<Artista> leerArtistas() {
-        return new DArtista().leerArtistas();
+        
+        listaArtistas = new DArtista().leerArtistas();
+        
+        for (Artista artista: listaArtistas) {
+        
+        }
+        
+        return listaArtistas;
     }
     
     /**

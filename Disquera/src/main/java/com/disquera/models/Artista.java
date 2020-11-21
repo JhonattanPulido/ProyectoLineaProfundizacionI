@@ -52,7 +52,7 @@ public class Artista implements Serializable {
     /**
      * Imagen del artista
      */
-    private byte[] imagen;
+    private String imagen;
     
     /**
      * Constructor de la clase
@@ -113,11 +113,11 @@ public class Artista implements Serializable {
         this.genero = genero;
     }    
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }   
 }
