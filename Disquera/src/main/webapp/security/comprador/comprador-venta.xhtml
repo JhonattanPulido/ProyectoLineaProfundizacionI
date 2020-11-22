@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <h:head>
 
-        <title>Disquera SJ | Carrito</title>
+        <title>Disquera SJ | Venta</title>
 
         <!--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />-->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -58,13 +58,42 @@
         </header>
 
         <!-- Page Content -->
-        <div class="page-heading products-heading-comprador header-text">
+        <div class="page-heading products-heading-venta header-text">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="text-content">
                             <h4>Productos</h4>
-                            <h2>Carrito</h2>
+                            <h2>Venta</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filters">
+                            <ul>
+                                <li class="active">Albumes-Canciones</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="lista-artistas">
+
+                                                <p:growl id="growl" showDetail="true" sticky="true" /> 
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

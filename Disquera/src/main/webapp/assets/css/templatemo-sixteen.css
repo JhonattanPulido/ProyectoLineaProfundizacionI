@@ -100,6 +100,10 @@ a.filled-button:hover {
 	background-image: url(../images/comprador.jpg);
 }
 
+.products-heading-venta {
+	background-image: url(../images/venta.jpg);
+}
+
 .about-heading {
 	background-image: url(../images/about-heading.jpg);
 }
