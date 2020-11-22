@@ -43,6 +43,11 @@ public class AlbumAdministradorController implements Serializable {
     private List<Artista> listaArtista;
     
     /**
+     * 
+     */
+    private List<Album> listaAlbumes;
+    
+    /**
      * Variable auxiliar de canción
      */
     private Cancion cancion;
@@ -52,7 +57,8 @@ public class AlbumAdministradorController implements Serializable {
      */
     public AlbumAdministradorController() {
         album = new Album();                  
-        listaArtista = new LArtista().leerArtistas();    
+        listaArtista = new LArtista().leerArtistas();  
+        listaAlbumes = new LAlbum().leerAlbum();
         cancion = new Cancion();
     }
     
@@ -136,5 +142,13 @@ public class AlbumAdministradorController implements Serializable {
 
     public void setCancion(Cancion cancion) {
         this.cancion = cancion;
+    }        
+
+    public List<Album> getListaAlbumes() {
+        return listaAlbumes;
+    }
+
+    public void setListaAlbumes(List<Album> listaAlbumes) {
+        this.listaAlbumes = listaAlbumes;
     }        
 }

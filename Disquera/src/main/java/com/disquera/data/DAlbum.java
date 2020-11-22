@@ -3,6 +3,7 @@ package com.disquera.data;
 
 import com.disquera.models.Album;
 import com.disquera.models.Artista;
+import com.disquera.models.Cancion;
 import com.disquera.models.Genero;
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -122,10 +125,11 @@ public class DAlbum implements Serializable {
             
                 album = new Album();                
                 album.setId(respuesta.getShort("id"));
-                album.setNombre(respuesta.getString("imagen"));
+                album.setNombre(respuesta.getString("nombre"));
                 album.setPrecio(respuesta.getDouble("precio"));           
                 album.setArtistaId(respuesta.getShort("artista_id"));  
                 
+                artista = new Artista();
                 artista.setId(respuesta.getShort("artista_id"));
                 artista.setNombre(respuesta.getString("artista_nombre"));
                 artista.setNacionalidad(respuesta.getString("artista_nacionalidad"));
@@ -138,12 +142,18 @@ public class DAlbum implements Serializable {
                 genero.setNombre(respuesta.getString("artista_genero_musical_nombre"));
                 artista.setGenero(genero);
                 
+                JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
+                
+                for (short i = 0; i < JSONCanciones.length(); i++)  
+                    album.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
+                
                 listaAlbumes.add(album);
             }
             
             return listaAlbumes;
             
-        } catch (SQLException ex) {        
+        } catch (SQLException ex) {   
+            System.out.println("ERROR: " + ex);
             return null;
         }
     }
@@ -193,6 +203,11 @@ public class DAlbum implements Serializable {
                 genero.setId(respuesta.getShort("artista_genero_musical_id"));
                 genero.setNombre(respuesta.getString("artista_genero_musical_nombre"));
                 artista.setGenero(genero);
+                
+                JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
+                
+                for (short i = 0; i < JSONCanciones.length(); i++)  
+                    album.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
             }                        
             
             return album;

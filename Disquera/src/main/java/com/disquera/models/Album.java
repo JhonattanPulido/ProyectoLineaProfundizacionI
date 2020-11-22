@@ -44,7 +44,7 @@ public class Album implements Serializable{
     private Artista artista;
     
     /**
-     * 
+     * Lista de canciones
      */
     private List<Cancion> listaCanciones;
 
