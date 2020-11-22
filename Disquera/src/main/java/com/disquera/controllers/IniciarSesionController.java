@@ -69,7 +69,7 @@ public class IniciarSesionController implements Serializable {
             if (usuario.getRolId() == 1)
                 facesContext.getExternalContext().redirect("faces/security/administrador/admin-artistas.xhtml");
             else
-                facesContext.getExternalContext().redirect("faces/security/comprador/albumes.xhtml");
+                facesContext.getExternalContext().redirect("faces/security/comprador/comprador-carrito.xhtml");
             
         } else
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario y / o clave incorrectos"));
