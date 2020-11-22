@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         
         <title>Facelet Title</title>
@@ -38,12 +40,12 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Artistas
+                                <a class="nav-link" href="admin-artistas.xhtml">Artistas
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li> 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Álbumes</a>
+                                <a class="nav-link" href="admin-albumes.xhtml">Álbumes</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html">Cerrar sesión</a>
@@ -53,21 +55,86 @@
                 </div>
             </nav>
         </header>
-        
+
         <!-- Page Content -->
-        <div class="page-heading products-heading header-text">
+        <div class="page-heading products-heading-album header-text">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="text-content">
                             <h4>Álbumes</h4>
                             <h2>Registrados</h2>
+                            <div class="products">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="filters">
+                                                <ul>
+                                                    <li class="active">Crear album</li>                                
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                                            <div class="container">
+                                                <div class="row">  
+                                                    <h:form id="inicio-sesion" enctype="multipart/form-data">
+                                                    <p:growl id="grow2" showDetail="true" sticky="true" /> 
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <fieldset>
+                                                                <p:inputText id="nombre" class="form-control" value="#{albumAdministradorController.album.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />
+                                                            </fieldset>
+                                                        </div>
+                                                        <br/>
+                                                        <br/>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="ui-inputgroup">
+                                                                <span class="ui-inputgroup-addon">$</span>
+                                                                <p:inputText id="precio" class="form-control" value="#{albumAdministradorController.album.precio}" placeholder="Precio" style="box-shadow: none;" autocomplete="off" required="true" />    
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <fieldset>
+                                                                <p:outputLabel for="artista-id" value="Artista:" />
+                                                                <p:selectOneRadio id="artista-id" value="#{albumAdministradorController.album.artistaId}" layout="responsive" columns="3" required="true">
+                                                                    <f:selectItems value="#{albumAdministradorController.listaArtista}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
+                                                                </p:selectOneRadio>
+                                                            </fieldset>
+                                                        </div>
+                                                        <br/>
+                                                        <br/>
+                                                        <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
+                                                            <fieldset>
+                                                                <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{albumAdministradorController.crearAlbum()}" value="Guardar" validateClient="true" />
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                    </h:form>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-content">
+                            <p>Copyright &copy; 2020 Disquera SJ Co., Ltd.
+
+                                - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <!-- Bootstrap core JavaScript -->
         <script src="../../vendor/jquery/jquery.min.js"></script>
         <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
