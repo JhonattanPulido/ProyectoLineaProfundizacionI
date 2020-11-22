@@ -50,6 +50,11 @@ public class IniciarSesionController implements Serializable {
     }
     
     // Métodos
+    
+    /**
+     * Validar inicio de sesión de un usuario
+     * @throws IOException 
+     */
     public void validarUsuario() throws IOException {
     
         facesContext = FacesContext.getCurrentInstance();
@@ -69,9 +74,7 @@ public class IniciarSesionController implements Serializable {
         } else
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Nombre de usuario y / o clave incorrectos"));
     }
-    
-    // Métodos       
-    
+        
     // Métodos Set & Get
 
     public IniciarSesion getIniciarSesion() {

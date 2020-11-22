@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
-        <title>Facelet Title</title>
+        <title>Disquera SJ | Álbumes</title>
 
         <!--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />-->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -48,7 +48,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">Cerrar sesión</a>
+                                <h:form>
+                                    <p:commandButton class="nav-link" action="#{artistasAdministradorController.cerrarSesion()}" value="Cerrar sesión" />
+                                </h:form> 
                             </li>                            
                         </ul>
                     </div>
@@ -128,7 +130,7 @@
                     <div class="col-md-12">
                         <div class="filters">
                             <ul>
-                                <li class="active">Crear album</li>                                
+                                <li class="active">Agregar canciones</li>                                
                             </ul>
                         </div>
                     </div>

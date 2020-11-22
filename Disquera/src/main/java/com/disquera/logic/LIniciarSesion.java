@@ -50,4 +50,12 @@ public class LIniciarSesion {
         
         return usuario != null;
     }
+    
+    /**
+     * Cerrar sesión de un usuario     
+     */
+    public void cerrarSesion() {
+        facesContext = FacesContext.getCurrentInstance();        
+        facesContext.getExternalContext().invalidateSession();   
+    }
 }

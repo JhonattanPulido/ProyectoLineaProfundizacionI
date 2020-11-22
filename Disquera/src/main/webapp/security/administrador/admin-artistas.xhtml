@@ -30,7 +30,7 @@
         <!-- ***** Preloader End ***** -->  
 
         <!-- Header -->
-        <header class="" style="position: relative !important;">
+        <header class="">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="index.html"><h2>Disquera <em>SJ</em></h2></a>
@@ -47,8 +47,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="admin-albumes.xhtml">Álbumes</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html">Cerrar sesión</a>
+                            <li class="nav-item">  
+                                <h:form>
+                                    <p:commandButton class="nav-link" action="#{artistasAdministradorController.cerrarSesion()}" value="Cerrar sesión" />
+                                </h:form>                                
                             </li>                            
                         </ul>
                     </div>

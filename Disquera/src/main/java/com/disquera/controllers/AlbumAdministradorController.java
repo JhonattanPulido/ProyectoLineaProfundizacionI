@@ -4,9 +4,11 @@ package com.disquera.controllers;
 //Librerias
 import com.disquera.logic.LAlbum;
 import com.disquera.logic.LArtista;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Album;
 import com.disquera.models.Artista;
 import com.disquera.models.Cancion;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +100,16 @@ public class AlbumAdministradorController implements Serializable {
         promedio = promedio / album.getListaCanciones().size();
 
         album.setPrecio(album.getPrecio() - promedio); // Aqui ya esta el precio final        
+    }
+    
+    /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
     }
     
     // Métodos Set & Get

@@ -6,9 +6,9 @@ import com.disquera.help.Constantes;
 import com.disquera.help.FacesUtils;
 import com.disquera.logic.LArtista;
 import com.disquera.logic.LGenero;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Artista;
 import com.disquera.models.Genero;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -109,6 +109,7 @@ public class ArtistasAdministradorController implements Serializable {
     
     /**
      * Subir imágen al servidor
+     * @return 
      */
     public boolean nuevaImagen() {
         
@@ -147,7 +148,8 @@ public class ArtistasAdministradorController implements Serializable {
     
     /**
      * 
-     * @param event 
+     * @param fileName
+     * @param in 
      */
     public void copyFile(String fileName, InputStream in) {
     
@@ -191,6 +193,16 @@ public class ArtistasAdministradorController implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+    
+    /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
     }
     
     // Métodos Set & Get
