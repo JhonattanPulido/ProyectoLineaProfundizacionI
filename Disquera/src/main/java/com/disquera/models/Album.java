@@ -3,6 +3,8 @@ package com.disquera.models;
 
 //Librerias
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -23,7 +25,7 @@ public class Album implements Serializable{
     /**
      * Nombre del album
      */
-    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ]{2,20}", message = "Nombre: Debe tener mínimo 2 y máximo 20 letras")
+    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}", message = "Nombre: Debe tener mínimo 2 y máximo 20 letras")
     private String nombre;
     
     /**
@@ -38,14 +40,20 @@ public class Album implements Serializable{
     
     /**
      * Artista del album
-     */
-    
+     */    
     private Artista artista;
+    
+    /**
+     * 
+     */
+    private List<Cancion> listaCanciones;
 
     /**
      * Contructor del album
      */
-    public Album() {
+    public Album() {       
+        precio = 0;
+        listaCanciones = new ArrayList<>();        
     }
 
     //Metodos Set & Get
@@ -89,7 +97,12 @@ public class Album implements Serializable{
     public void setArtista(Artista artista) {
         this.artista = artista;
     }
-    
-    
-    
+
+    public List<Cancion> getListaCanciones() {
+        return listaCanciones;
+    }
+
+    public void setListaCanciones(List<Cancion> listaCanciones) {
+        this.listaCanciones = listaCanciones;
+    }            
 }

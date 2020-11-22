@@ -57,9 +57,10 @@ public class DAlbum implements Serializable {
     /**
      * Crear album
      * @param album
+     * @param cancionesJSON
      * @return true si el artista se creo correctamente
      */
-    public boolean crearAlbum(Album album) {
+    public boolean crearAlbum(Album album, String cancionesJSON) {
     
         try {
             
@@ -75,16 +76,18 @@ public class DAlbum implements Serializable {
                 "LCPzVCxRrZtS2BS"    
             );
             
-            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_album(?,?,?) }");
+            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_album(?,?,?,?) }");
             funcion.setString(1, album.getNombre());
             funcion.setDouble(2, album.getPrecio());  
             funcion.setShort(3, album.getArtistaId());
+            funcion.setString(4, cancionesJSON);
             
             ResultSet respuesta = funcion.executeQuery();                        
             
-            return respuesta.getBoolean(0);
+            return true;
             
-        } catch (SQLException ex) {        
+        } catch (SQLException ex) { 
+            System.out.println("Album error: " + ex);
             return false;
         }
     }

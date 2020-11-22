@@ -29,10 +29,11 @@ public class LAlbum implements Serializable{
     /**
      * Crear album
      * @param album
+     * @param cancionesJSON
      * @return true si el artista se creo correctamente
      */
-    public boolean crearAlbum(Album album) {
-        return new DAlbum().crearAlbum(album);
+    public boolean crearAlbum(Album album, String cancionesJSON) {
+        return new DAlbum().crearAlbum(album, cancionesJSON);
     }
     
     /**

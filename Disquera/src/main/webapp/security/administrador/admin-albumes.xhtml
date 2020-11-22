@@ -5,9 +5,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        
+
         <title>Facelet Title</title>
-        
+
         <!--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />-->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -15,10 +15,10 @@
         <link rel="stylesheet" href="../../assets/css/fontawesome.css" />
         <link rel="stylesheet" href="../../assets/css/templatemo-sixteen.css" />
         <link rel="stylesheet" href="../../assets/css/owl.css" />
-        
+
     </h:head>
     <h:body>
-        
+
         <!-- ***** Preloader Start ***** -->
         <div id="preloader">
             <div class="jumper">
@@ -40,12 +40,12 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="admin-artistas.xhtml">Artistas
-                                    <span class="sr-only">(current)</span>
-                                </a>
+                                <a class="nav-link" href="admin-artistas.xhtml">Artistas</a>
                             </li> 
                             <li class="nav-item">
-                                <a class="nav-link" href="admin-albumes.xhtml">Álbumes</a>
+                                <a class="nav-link" href="admin-albumes.xhtml">Álbumes
+                                    <span class="sr-only">(current)</span>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html">Cerrar sesión</a>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </nav>
-        </header>
+        </header>        
 
         <!-- Page Content -->
         <div class="page-heading products-heading-album header-text">
@@ -63,65 +63,114 @@
                     <div class="col-md-12">
                         <div class="text-content">
                             <h4>Álbumes</h4>
-                            <h2>Registrados</h2>
-                            <div class="products">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="filters">
-                                                <ul>
-                                                    <li class="active">Crear album</li>                                
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
-                                            <div class="container">
-                                                <div class="row">  
-                                                    <h:form id="inicio-sesion" enctype="multipart/form-data">
-                                                    <p:growl id="grow2" showDetail="true" sticky="true" /> 
-
-                                                    <div class="row">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <fieldset>
-                                                                <p:inputText id="nombre" class="form-control" value="#{albumAdministradorController.album.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />
-                                                            </fieldset>
-                                                        </div>
-                                                        <br/>
-                                                        <br/>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <div class="ui-inputgroup">
-                                                                <span class="ui-inputgroup-addon">$</span>
-                                                                <p:inputText id="precio" class="form-control" value="#{albumAdministradorController.album.precio}" placeholder="Precio" style="box-shadow: none;" autocomplete="off" required="true" />    
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                                            <fieldset>
-                                                                <p:outputLabel for="artista-id" value="Artista:" />
-                                                                <p:selectOneRadio id="artista-id" value="#{albumAdministradorController.album.artistaId}" layout="responsive" columns="3" required="true">
-                                                                    <f:selectItems value="#{albumAdministradorController.listaArtista}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
-                                                                </p:selectOneRadio>
-                                                            </fieldset>
-                                                        </div>
-                                                        <br/>
-                                                        <br/>
-                                                        <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
-                                                            <fieldset>
-                                                                <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{albumAdministradorController.crearAlbum()}" value="Guardar" validateClient="true" />
-                                                            </fieldset>
-                                                        </div>
-                                                    </div>
-                                                    </h:form>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h2>Registrados</h2>                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filters">
+                            <ul>
+                                <li class="active">Crear album</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">  
+                                <h:form id="form">
+
+                                    <p:growl id="grow2" showDetail="true" sticky="true" /> 
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <fieldset>
+                                                <p:inputText id="nombre" class="form-control" value="#{albumAdministradorController.album.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />
+                                            </fieldset>
+                                        </div>                                        
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="ui-inputgroup">
+                                                <span class="ui-inputgroup-addon">$</span>
+                                                <h:outputText value="#{albumAdministradorController.album.precio}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <fieldset>
+                                                <p:outputLabel for="artista-id" value="Artista:" />
+                                                <p:selectOneRadio id="artista-id" value="#{albumAdministradorController.album.artistaId}" layout="responsive" columns="3" required="true">
+                                                    <f:selectItems value="#{albumAdministradorController.listaArtista}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
+                                                </p:selectOneRadio>
+                                            </fieldset>
+                                        </div>                                                                           
+
+                                        <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
+                                            <fieldset>
+                                                <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{albumAdministradorController.crearAlbum()}" value="Guardar" validateClient="true" />
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="filters">
+                            <ul>
+                                <li class="active">Crear album</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">  
+                                <h:form id="otro">
+
+                                    <p:growl id="g" showDetail="true" sticky="true" /> 
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <fieldset>
+                                            <p:dataTable id="canciones" var="cancion" value="#{albumAdministradorController.album.listaCanciones}" rowKey="#{cancion.nombre}">
+                                                <f:facet name="header">
+                                                    Canciones agregadas
+                                                </f:facet>
+                                                <p:column headerText="Nombre">
+                                                    <h:outputText value="#{cancion.nombre}" />
+                                                </p:column>
+                                                <p:column headerText="Precio">
+                                                    <h:outputText value="#{cancion.precio}" />
+                                                </p:column>                                                    
+                                            </p:dataTable>                                                 
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="ui-inputgroup">                                                
+                                            <p:inputText id="nombre-cancion" class="form-control" value="#{albumAdministradorController.cancion.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />    
+                                            <p:inputText id="precio-cancion" class="form-control" value="#{albumAdministradorController.cancion.precio}" placeholder="Precio" style="box-shadow: none;" autocomplete="off" required="true" />    
+                                            <p:commandButton actionListener="#{albumAdministradorController.agregarCancion()}" value="Agregar" update="canciones form" />
+                                        </div>
+                                    </div>
+                                                           
+                                </h:form>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <div class="container">
                 <div class="row">
@@ -158,7 +207,7 @@
                 }
             }
         </script>
-        
+
     </h:body>
 </html>
 
