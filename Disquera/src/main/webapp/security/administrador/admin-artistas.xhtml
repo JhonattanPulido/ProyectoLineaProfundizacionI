@@ -30,7 +30,7 @@
         <!-- ***** Preloader End ***** -->  
 
         <!-- Header -->
-        <header class="">
+        <header class="" style="position: relative !important;">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="index.html"><h2>Disquera <em>SJ</em></h2></a>
@@ -89,26 +89,25 @@
                                     <div>
                                         <div class="contact-form">
                                             <h:form id="lista-artistas">
-                                                
+
                                                 <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:dataTable id="cars1" var="artista" value="#{artistasAdministradorController.listaArtistas}" editable="true" style="margin-bottom:20px"
+                                                            <p:dataTable id="cars1" var="artista" value="#{artistasAdministradorController.listaArtistas}" editable="true" style="margin-bottom:20px"  editMode="cell" widgetVar="cellArtistas"
                                                                          rows="10"
-                                                                        paginator="true"
-                                                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                                                        currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                                                                        rowsPerPageTemplate="5,10,15"
-                                                                        emptyMessage="No cars found with given criteria" filteredValue="#{dtFilterView.filteredCars2}"
-                                                                        globalFilterFunction="#{dtFilterView.globalFilterFunction}">
+                                                                         paginator="true"
+                                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                                                         rowsPerPageTemplate="5,10,15"
+                                                                         emptyMessage="No cars found with given criteria" filteredValue="#{dtFilterView.filteredCars2}"
+                                                                         globalFilterFunction="#{dtFilterView.globalFilterFunction}">
                                                                 <f:facet name="header">
                                                                     Artistas
                                                                 </f:facet>
 
-                                                                <p:ajax event="rowEdit" listener="#{artistasAdministradorController.onRowEdit}" update=":lista-artistas:growl" />
-                                                                <p:ajax event="rowEditCancel" listener="#{artistasAdministradorController.onRowCancel}" update=":lista-artistas:growl" />
+                                                                <p:ajax event="cellEdit" listener="#{artistasAdministradorController.onCellEdit}" update=":lista-artistas:growl" />
 
                                                                 <p:column headerText="Id">
                                                                     <p:cellEditor>
@@ -134,7 +133,7 @@
                                                                         </f:facet>
                                                                     </p:cellEditor>
                                                                 </p:column>
-                                                                
+
                                                                 <p:column headerText="Nacionalidad">
                                                                     <p:cellEditor>
                                                                         <f:facet name="output"><h:outputText value="#{artista.nacionalidad}" /></f:facet>
@@ -150,17 +149,20 @@
                                                                     <p:cellEditor>
                                                                         <f:facet name="output">
                                                                             <img src="../../#{artista.imagen}" width="190px" height="120px" />
-                                                                        </f:facet>
+                                                                        </f:facet>                                                                        
                                                                         <f:facet name="input">
-                                                                            <f:facet name="input"><p:inputText value="#{artista.nombre}" style="width:100%" label="Year"/></f:facet>
-                                                                        </f:facet>
+                                                                            <p:fileUpload id="imagen-actualizada" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true" disabled="true"/>
+                                                                        </f:facet>                                                                        
                                                                     </p:cellEditor>
                                                                 </p:column>
-
-                                                                <p:column style="width:35px">
-                                                                    <p:rowEditor />
-                                                                </p:column>
+                                                                
                                                             </p:dataTable>
+
+                                                            <p:contextMenu for="cars1" widgetVar="cMenu">   
+                                                                <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellArtistas').showCellEditor();return false;"/>  
+                                                                <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+                                                            </p:contextMenu> 
+                                                            
                                                         </fieldset>
                                                     </div>
                                                 </div>
@@ -174,7 +176,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="products">
             <div class="container">
                 <div class="row">
@@ -237,7 +239,7 @@
                                                     </div>                                                    
                                                     <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
                                                         <fieldset>
-                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form" action="#{artistasAdministradorController.crearArtista()}" value="Guardar" validateClient="true" ajax="false" />
+                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form cars1" action="#{artistasAdministradorController.crearArtista()}" value="Guardar" validateClient="true" ajax="false" />
                                                         </fieldset>
                                                     </div>
                                                 </div>

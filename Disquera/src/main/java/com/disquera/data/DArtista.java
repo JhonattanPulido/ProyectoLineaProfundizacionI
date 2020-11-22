@@ -214,17 +214,18 @@ public class DArtista implements Serializable {
             );
             
             CallableStatement funcion = dbContext.prepareCall("{ call f_actualizar_artista(?,?,?,?,?) }");
-            funcion.setString(1, artista.getNombre());
-            funcion.setString(2, artista.getNacionalidad());  
-            funcion.setDate(3, artista.getFechaNacimiento());  
+            funcion.setShort(1, artista.getId());
+            funcion.setString(2, artista.getNombre());
+            funcion.setString(3, artista.getNacionalidad());              
             funcion.setShort(4, artista.getGeneroId());
             funcion.setString(5, artista.getImagen());
             
             ResultSet respuesta = funcion.executeQuery();                        
             
-            return respuesta.getBoolean(0);
+            return true;
             
-        } catch (SQLException ex) {        
+        } catch (SQLException ex) {  
+            System.out.println("ERROR: " + ex);
             return false;
         }                
     }

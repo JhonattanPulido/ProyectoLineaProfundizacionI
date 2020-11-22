@@ -9,6 +9,7 @@ import com.disquera.logic.LGenero;
 import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Artista;
 import com.disquera.models.Genero;
+import com.disquera.models.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +25,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.file.UploadedFile;
 
 /**
@@ -89,6 +89,7 @@ public class ArtistasAdministradorController implements Serializable {
         listaNacionalidades.add("Argentina");
         listaNacionalidades.add("Estadounidense");
         listaNacionalidades.add("Francesa");
+        listaNacionalidades.add("Española");
     }
     
     // Métodos
@@ -99,9 +100,12 @@ public class ArtistasAdministradorController implements Serializable {
     public void crearArtista() {            
         
         if (nuevaImagen()) {
-            if (new LArtista().crearArtista(artista))
+            if (new LArtista().crearArtista(artista)) {
+            
                 System.out.println("Creado");
-            else
+                listaArtistas = new LArtista().leerArtistas();
+                
+            } else
                 System.out.println("No creado");
         } else
             System.out.println("ERROR subiendo imagen");
@@ -175,25 +179,34 @@ public class ArtistasAdministradorController implements Serializable {
         }
     }
         
-    public void onRowEdit(RowEditEvent<Artista> event) {
-        FacesMessage msg = new FacesMessage("Car Edited", event.getObject().getId() + "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-     
-    public void onRowCancel(RowEditEvent<Artista> event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", event.getObject().getId() + "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-    
     public void onCellEdit(CellEditEvent event) {
+        
         Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+        Object newValue = event.getNewValue();        
+        
+        Artista artistaActualizado = listaArtistas.get(event.getRowIndex());        
+        
+        switch (event.getColumn().getHeaderText()) {
+            
+            case "Nombre":
+                artistaActualizado.setNombre(newValue.toString());
+                break;
+                
+            case "Género musical":
+                artistaActualizado.setGeneroId((short) newValue);
+                break;
+                
+            case "Nacionalidad":
+                artistaActualizado.setNacionalidad(newValue.toString());
+                break;                                                            
+        }                 
+        
+        if (new LArtista().actualizarArtista(artistaActualizado)) {
+            listaArtistas = new LArtista().leerArtistas();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Columna actualizada correctamente", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-    }
+    }          
     
     /**
      * Cerrar sesión del usuario     
