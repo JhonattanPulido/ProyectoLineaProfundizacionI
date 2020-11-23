@@ -3,6 +3,8 @@ package com.disquera.models;
 
 // Librerías
 import java.io.Serializable;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Pattern;
 
 /**
  * Clase canción
@@ -17,11 +19,13 @@ public class Cancion implements Serializable {
     /**
      * Nombre de la canción
      */
+    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,30}", message = "Nombre canción: Debe tener mínimo 2 y máximo 30 letras")
     private String nombre;
     
     /**
      * Precio de la canción
      */
+    @DecimalMin(value= "1", message = "Precio canción: Debe ser mayor a 0")
     private double precio;    
     
     /**

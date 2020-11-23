@@ -25,7 +25,7 @@ public class Album implements Serializable{
     /**
      * Nombre del album
      */
-    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}", message = "Nombre: Debe tener mínimo 2 y máximo 20 letras")
+    @Pattern(regexp="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,20}", message = "Nombre álbum: Debe tener mínimo 2 y máximo 20 letras")
     private String nombre;
     
     /**

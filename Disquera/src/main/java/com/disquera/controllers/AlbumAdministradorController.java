@@ -10,8 +10,8 @@ import com.disquera.models.Artista;
 import com.disquera.models.Cancion;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -51,10 +51,7 @@ public class AlbumAdministradorController implements Serializable {
     /**
      * Variable auxiliar de canción
      */
-    private Cancion cancion;
-    
-    // Borrar
-    private short albumId;
+    private Cancion cancion;   
 
     /**
      * Constructor del controlador
@@ -79,37 +76,51 @@ public class AlbumAdministradorController implements Serializable {
             
             JSONArray JSONCanciones = new JSONArray(album.getListaCanciones());
             
-            if (new LAlbum().crearAlbum(album, JSONCanciones.toString()))
-                System.out.println("Creado correctamente");
-            else
-                System.out.println("Error creando album");
+            if (new LAlbum().crearAlbum(album, JSONCanciones.toString())) {
+            
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Álbum creado correctamente", album.getNombre()));
+                album.setNombre(null);
+                album.setListaCanciones(null);
+                listaAlbumes = new LAlbum().leerAlbum();
+                
+            } else
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudó crear el álbum, intentelo nuevamente"));
             
         } else
-            System.out.println("No hay canciones");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No ha agregado canciones"));
     }        
 
     public void agregarCancion() {            
         album.getListaCanciones().add(new Cancion(cancion.getNombre(), cancion.getPrecio()));        
-        calcularPrecioAlbum();
+        calcularPrecioAlbum();                
+        cancion.setNombre(null);
+        cancion.setPrecio(0);
     }
     
-    // Obtener precio del álbum
+    /**
+     * Calcular el precio del álbum
+     */
     private void calcularPrecioAlbum() {
         
-        album.setPrecio(0);
+        if (album.getListaCanciones().size() == 1)
+            album.setPrecio(album.getListaCanciones().get(0).getPrecio());
+        else {
+            
+            album.setPrecio(0);
         
-        // Agregando precio inicial del álbum
-        for (Cancion cancionAuxiliar: album.getListaCanciones())
-            album.setPrecio(album.getPrecio() + cancionAuxiliar.getPrecio());
+            // Agregando precio inicial del álbum
+            for (Cancion cancionAuxiliar: album.getListaCanciones())
+                album.setPrecio(album.getPrecio() + cancionAuxiliar.getPrecio());
 
-        double promedio = 0;
+            double promedio = 0;
 
-        for (Cancion cancionAuxiliar: album.getListaCanciones())
-            promedio += cancionAuxiliar.getPrecio();                        
+            for (Cancion cancionAuxiliar: album.getListaCanciones())
+                promedio += cancionAuxiliar.getPrecio();                        
 
-        promedio = promedio / album.getListaCanciones().size();
+            promedio = promedio / album.getListaCanciones().size();
 
-        album.setPrecio(album.getPrecio() - promedio); // Aqui ya esta el precio final        
+            album.setPrecio(Math.round(album.getPrecio() - promedio)); // Aqui ya esta el precio final 
+        }                       
     }
     
     /**

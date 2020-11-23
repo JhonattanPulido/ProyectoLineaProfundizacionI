@@ -88,10 +88,8 @@
                                 <div class="col-md-12">                                    
                                     <div>
                                         <div class="contact-form">
-                                            <h:form id="lista-artistas">
+                                            <h:form id="lista-artistas">                                               
 
-                                                <h:commandButton action="#{albumAdministradorController.redireccionar()}" value="Redireccionar" />
-                                                
                                                 <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                                                 <!-- ESTE ES EL DATATABLE -->
@@ -116,30 +114,35 @@
                                                                     <h:outputText value="#{album.id}" />
                                                                 </p:column>
 
+                                                                <p:column headerText="Artista">
+                                                                    <h:outputText value="#{album.artista.nombre}" />
+                                                                </p:column>  
+                                                                
                                                                 <p:column headerText="Nombre">
                                                                     <h:outputText value="#{album.nombre}" />
                                                                 </p:column>
 
                                                                 <p:column headerText="Precio">
                                                                     <h:outputText value="#{album.precio}" />
-                                                                </p:column>
+                                                                </p:column>                                                                
 
-                                                                <p:column headerText="Ver">
-                                                                    <h:commandButton action="#{albumAdministradorController.redireccionar(album.id)}" value="Ver" />
-                                                                </p:column>
-                                                                
-                                                                <p:column headerText="Color">
+                                                                <p:column headerText="Canciones">
                                                                     <p:dataTable var="cancion" value="#{album.listaCanciones}">
-                                                                        <p:column headerText="Id">
+                                                                        <p:column headerText="Nombre">
                                                                             <h:outputText value="#{cancion.nombre}" />
                                                                         </p:column>
 
-                                                                        <p:column headerText="Year">
+                                                                        <p:column headerText="Precio">
                                                                             <h:outputText value="#{cancion.precio}" />
                                                                         </p:column>
 
                                                                     </p:dataTable>
                                                                 </p:column>
+                                                                
+                                                                <p:column headerText="Ver">
+                                                                    <h:commandButton action="#{albumAdministradorController.redireccionar(album.id)}" value="Ver" />
+                                                                </p:column>
+                                                                
                                                             </p:dataTable>
                                                         </fieldset>                                                
                                                     </div>
@@ -153,8 +156,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>       
 
         <div class="products">
             <div class="container">
@@ -162,48 +164,65 @@
                     <div class="col-md-12">
                         <div class="filters">
                             <ul>
-                                <li class="active">Crear album</li>                                
+                                <li class="active">Crear álbum</li>                                
                             </ul>
                         </div>
                     </div>
                     <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
                         <div class="container">
-                            <div class="row">  
-                                <h:form id="form">
+                            <div class="row">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="form">
 
-                                    <p:growl id="grow2" showDetail="true" sticky="true" /> 
+                                                <p:growl id="grow2" showDetail="true" sticky="true" /> 
 
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <fieldset>
-                                                <p:inputText id="nombre" class="form-control" value="#{albumAdministradorController.album.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />
-                                            </fieldset>
-                                        </div>                                        
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="ui-inputgroup">
-                                                <span class="ui-inputgroup-addon">$</span>
-                                                <h:outputText value="#{albumAdministradorController.album.precio}" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <fieldset>
-                                                <p:outputLabel for="artista-id" value="Artista:" />
-                                                <p:selectOneRadio id="artista-id" value="#{albumAdministradorController.album.artistaId}" layout="responsive" columns="3" required="true">
-                                                    <f:selectItems value="#{albumAdministradorController.listaArtista}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
-                                                </p:selectOneRadio>
-                                            </fieldset>
-                                        </div>                                                                           
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; flex-flow: row; margin-bottom: 30px;">
 
-                                        <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
-                                            <fieldset>
-                                                <p:commandButton id="boton-submit" class="filled-button"  update="@form" actionListener="#{albumAdministradorController.crearAlbum()}" value="Guardar" validateClient="true" />
-                                            </fieldset>
+                                                        <fieldset style="width: 48%; margin-right: 4%;">
+
+                                                            <!-- Nombre -->
+                                                            <p:inputText id="nombre-album" class="form-control" value="#{albumAdministradorController.album.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" />
+
+                                                        </fieldset>                                                                                    
+
+                                                        <fieldset style="width: 48%;">
+
+                                                            <!-- Precio -->
+                                                            <p:inputText id="precio-album" class="form-control" value="#{albumAdministradorController.album.precio}" placeholder="Precio" style="box-shadow: none;" disabled="true" />
+
+                                                        </fieldset>                                            
+
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; flex-flow: row; margin-bottom: 30px;">
+
+                                                        <fieldset style="width: 48%; margin-right: 4%;">
+
+                                                            <!-- Id artista -->                                                
+                                                            <p:outputLabel for="artista-id" value="Artista: " style="display: block;" /> 
+                                                            <h:selectOneMenu id="artista-id" value="#{albumAdministradorController.album.artistaId}" style="width: 100%; height: 44px; padding: 0 12px;" required="true">
+                                                                <f:selectItems value="#{albumAdministradorController.listaArtista}" var="artista" itemLabel="#{artista.nombre}" itemValue="#{artista.id}" />
+                                                            </h:selectOneMenu> 
+
+                                                        </fieldset>                                           
+
+                                                    </div>                                                                           
+
+                                                    <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
+                                                        <fieldset>
+                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form lista-artistas :otro:canciones" actionListener="#{albumAdministradorController.crearAlbum()}" ajax="true" value="Guardar" validateClient="true" />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </h:form>
                                         </div>
                                     </div>
-                                </h:form>
+                                </div>
                             </div>
-                        </div>  
-                    </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>
@@ -221,35 +240,52 @@
                     <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
                         <div class="container">
                             <div class="row">  
-                                <h:form id="otro">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="otro">
 
-                                    <p:growl id="g" showDetail="true" sticky="true" /> 
+                                                <p:growl id="g" showDetail="true" sticky="true" /> 
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <fieldset>
-                                            <p:dataTable id="canciones" var="cancion" value="#{albumAdministradorController.album.listaCanciones}" rowKey="#{cancion.nombre}">
-                                                <f:facet name="header">
-                                                    Canciones agregadas
-                                                </f:facet>
-                                                <p:column headerText="Nombre">
-                                                    <h:outputText value="#{cancion.nombre}" />
-                                                </p:column>
-                                                <p:column headerText="Precio">
-                                                    <h:outputText value="#{cancion.precio}" />
-                                                </p:column>                                                    
-                                            </p:dataTable>                                                 
-                                        </fieldset>
-                                    </div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12"  style="display: flex; flex-flow: row; margin-bottom: 30px;">
+                                                    <fieldset>
+                                                        <p:dataTable id="canciones" var="cancion" value="#{albumAdministradorController.album.listaCanciones}" rowKey="#{cancion.nombre}"
+                                                            emptyMessage="No se han agregado canciones">
+                                                            <f:facet name="header">
+                                                                Canciones agregadas
+                                                            </f:facet>
+                                                            <p:column headerText="Nombre">
+                                                                <h:outputText value="#{cancion.nombre}" />
+                                                            </p:column>
+                                                            <p:column headerText="Precio">
+                                                                <h:outputText value="#{cancion.precio}" />
+                                                            </p:column>                                                    
+                                                        </p:dataTable>                                                 
+                                                    </fieldset>
+                                                </div>
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="ui-inputgroup">                                                
-                                            <p:inputText id="nombre-cancion" class="form-control" value="#{albumAdministradorController.cancion.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" required="true" />    
-                                            <p:inputText id="precio-cancion" class="form-control" value="#{albumAdministradorController.cancion.precio}" placeholder="Precio" style="box-shadow: none;" autocomplete="off" required="true" />    
-                                            <p:commandButton actionListener="#{albumAdministradorController.agregarCancion()}" value="Agregar" update="canciones form" />
+                                                <div class="col-lg-12 col-md-12 col-sm-12"  style="display: flex; flex-flow: row;">
+
+                                                    <fieldset style="width: 48%; margin-right: 4%;"> 
+                                                        <p:inputText id="nombre-cancion" class="form-control" value="#{albumAdministradorController.cancion.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" />    
+                                                    </fieldset>   
+
+                                                    <fieldset style="width: 48%;">
+                                                        <p:inputText id="precio-cancion" class="form-control" value="#{albumAdministradorController.cancion.precio}" placeholder="Precio" style="box-shadow: none;" autocomplete="off" />    
+                                                    </fieldset>                                                        
+                                                    
+                                                </div>     
+
+                                                <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
+                                                    <fieldset>                                                        
+                                                        <p:commandButton class="filled-button" actionListener="#{albumAdministradorController.agregarCancion()}" ajax="true" value="Agregar" update="canciones :form:precio-album nombre-cancion precio-cancion" />
+                                                    </fieldset>
+                                                </div>
+
+                                            </h:form>
                                         </div>
                                     </div>
-
-                                </h:form>
+                                </div>
                             </div>
                         </div>  
                     </div>
