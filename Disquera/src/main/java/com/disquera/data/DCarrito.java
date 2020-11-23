@@ -71,7 +71,8 @@ public class DCarrito implements Serializable {
             
             CallableStatement funcion = dbContext.prepareCall("{ call f_crear_compra_carrito(?,?,?) }");
             funcion.setDouble(1, carrito.getPrecio());                          
-            funcion.setShort(2, carrito.getTipoVentaId());         
+            funcion.setShort(2, carrito.getTipoVentaId());  
+            funcion.setString(3, carrito.getDescripcion());
             
             ResultSet respuesta = funcion.executeQuery();                        
             
@@ -114,7 +115,8 @@ public class DCarrito implements Serializable {
                 carrito = new Carrito();                
                 carrito.setId(respuesta.getShort("id"));
                 carrito.setPrecio(respuesta.getDouble("precio"));               
-                carrito.setTipoVentaId(respuesta.getShort("tipo_venta_id"));     
+                carrito.setTipoVentaId(respuesta.getShort("tipo_venta_id"));   
+                carrito.setDescripcion(respuesta.getString("descripcion"));
                 
                 tipoVenta = new TipoVenta();
                 tipoVenta.setId(respuesta.getShort("tipo_venta_id"));
