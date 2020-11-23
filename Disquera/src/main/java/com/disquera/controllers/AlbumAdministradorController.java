@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.json.JSONArray;
+import org.primefaces.event.CellEditEvent;
 
 /**
  * Controlador de albumes para administrador
@@ -51,6 +52,9 @@ public class AlbumAdministradorController implements Serializable {
      * Variable auxiliar de canción
      */
     private Cancion cancion;
+    
+    // Borrar
+    private short albumId;
 
     /**
      * Constructor del controlador
@@ -116,6 +120,19 @@ public class AlbumAdministradorController implements Serializable {
         new LIniciarSesion().cerrarSesion();
         facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
+    }
+    
+    /**
+     * Actualizar álbum     
+     */
+    public void actualizarAlbum(CellEditEvent event) {
+    
+        
+    }
+    
+    public void redireccionar(short albumId) throws IOException {    
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("admin-actualizar-album.xhtml?albumId=" + albumId);
     }
     
     // Métodos Set & Get
