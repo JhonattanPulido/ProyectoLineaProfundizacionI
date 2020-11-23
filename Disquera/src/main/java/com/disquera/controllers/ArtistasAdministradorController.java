@@ -179,6 +179,10 @@ public class ArtistasAdministradorController implements Serializable {
         }
     }
         
+    /**
+     * Actualizar artista
+     * @param event Datos actualizados del artista
+     */
     public void onCellEdit(CellEditEvent event) {
         
         Object oldValue = event.getOldValue();
@@ -203,9 +207,10 @@ public class ArtistasAdministradorController implements Serializable {
         
         if (new LArtista().actualizarArtista(artistaActualizado)) {
             listaArtistas = new LArtista().leerArtistas();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Columna actualizada correctamente", "Old: " + oldValue + ", New:" + newValue);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Artista", "Artista actualizado correctamente");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
+        } else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Artista", "No se pudó actualizar el artista"));
     }          
     
     /**
