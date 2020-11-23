@@ -30,8 +30,7 @@ public class Artista implements Serializable {
     
     /**
      * Fecha de nacimiento del artista
-     */
-    @Past
+     */    
     private Date fechaNacimiento;
     
     /**

@@ -9,7 +9,6 @@ import com.disquera.logic.LGenero;
 import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Artista;
 import com.disquera.models.Genero;
-import com.disquera.models.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -99,21 +98,22 @@ public class ArtistasAdministradorController implements Serializable {
      */
     public void crearArtista() {            
         
-        if (nuevaImagen()) {
-            if (new LArtista().crearArtista(artista)) {
-            
-                System.out.println("Creado");
-                listaArtistas = new LArtista().leerArtistas();
-                
+        if (imagen.getSize() > 0) {                                
+            if (nuevaImagen()) {
+                if (new LArtista().crearArtista(artista)) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Artista", "Artista añadido correctamente"));
+                    listaArtistas = new LArtista().leerArtistas();
+                } else
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Artista", "El artista no se ha podido crear correctamente"));
             } else
-                System.out.println("No creado");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Imagen", "Error al cargar la imagen, intentelo nuevamente"));
         } else
-            System.out.println("ERROR subiendo imagen");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Imagen", "Debe añadir una imagen del artista"));                        
     }        
     
     /**
      * Subir imágen al servidor
-     * @return 
+     * @return verdadero si la imagen se cargó correctamente
      */
     public boolean nuevaImagen() {
         
@@ -126,7 +126,7 @@ public class ArtistasAdministradorController implements Serializable {
     }
     
     /**
-     *      
+     * Genera la ruta en la cual se guardará la imagen
      * @return true si la imágen se guarda correctamente
      */
     public boolean guardarImagen() {
@@ -151,9 +151,9 @@ public class ArtistasAdministradorController implements Serializable {
     }
     
     /**
-     * 
-     * @param fileName
-     * @param in 
+     * Guarda la imagen en el servidor
+     * @param fileName - Nombre del archivo
+     * @param in - Guarda los datos de la imagen
      */
     public void copyFile(String fileName, InputStream in) {
     

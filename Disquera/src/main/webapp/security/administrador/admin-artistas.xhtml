@@ -89,7 +89,7 @@
                                     <div>
                                         <div class="contact-form">
                                             <h:form id="lista-artistas">                                               
-                                                
+
                                                 <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                                                 <div class="row">
@@ -155,14 +155,14 @@
                                                                         </f:facet>                                                                        
                                                                     </p:cellEditor>
                                                                 </p:column>
-                                                                
+
                                                             </p:dataTable>
 
                                                             <p:contextMenu for="cars1" widgetVar="cMenu">   
                                                                 <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellArtistas').showCellEditor();return false;"/>  
                                                                 <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
                                                             </p:contextMenu> 
-                                                            
+
                                                         </fieldset>
                                                     </div>
                                                 </div>
@@ -198,44 +198,56 @@
                                                 <p:growl id="growl" showDetail="true" sticky="true" /> 
 
                                                 <div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; flex-flow: row; margin-bottom: 30px;">
+
+                                                        <fieldset style="width: 48%; margin-right: 4%;">
+
+                                                            <!-- Nombre --> 
                                                             <p:inputText id="nombre" class="form-control" value="#{artistasAdministradorController.artista.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" />
+
                                                         </fieldset>
+                                                        <fieldset style="width: 48%;">
+
+                                                            <!-- Fecha nacimiento -->
+                                                            <p:inputText type="date" id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true" requiredMessage="Fecha de nacimiento: Ingrese una fecha" disabled="true" />
+
+                                                        </fieldset>                                                                                                                                                                                      
                                                     </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>                                                                                                                        
-                                                            <p:outputLabel for="nacionalidad" value="Nacionalidad:" />
-                                                            <p:selectOneRadio id="nacionalidad" value="#{artistasAdministradorController.artista.nacionalidad}" unselectable="false" layout="responsive" columns="3" required="true">
-                                                                <f:selectItem itemLabel="Colombiana" itemValue="Colombiana" />
-                                                                <f:selectItem itemLabel="Mexicana" itemValue="Mexicana" />
-                                                                <f:selectItem itemLabel="Argentina" itemValue="Argentina" />
-                                                                <f:selectItem itemLabel="Española" itemValue="Española" />
-                                                                <f:selectItem itemLabel="Francesa" itemValue="Francesa" />
-                                                                <f:selectItem itemLabel="Estadounidense" itemValue="Estadounidense" />
-                                                            </p:selectOneRadio>                                                            
+
+                                                    <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; flex-flow: row; margin-bottom: 30px;">
+
+                                                        <fieldset style="width: 48%; margin-right: 4%;">  
+
+                                                            <!-- Nacionalidad --> 
+                                                            <p:outputLabel for="nacionalidad" value="Nacionalidad:" style="display: block;" /> 
+                                                            <h:selectOneMenu id="nacionalidad" value="#{artistasAdministradorController.artista.nacionalidad}" style="width: 100%; height: 44px; padding: 0 12px;" required="true">
+                                                                <f:selectItems value="#{artistasAdministradorController.listaNacionalidades}" var="nacionalidad" itemLabel="#{nacionalidad}" itemValue="#{nacionalidad}" />
+                                                            </h:selectOneMenu>                                                                                                                         
+
                                                         </fieldset>
-                                                    </div>
-                                                    <!--<div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>
-                                                            <p:inputText id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true">
-                                                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                                                            </p:inputText>
+
+                                                        <fieldset style="width: 48%;">
+
+                                                            <!-- Género musical -->
+                                                            <p:outputLabel for="genero-id" value="Género musical:" style="display: block;" />                                                            
+                                                            <h:selectOneMenu id="genero-id" value="#{artistasAdministradorController.artista.generoId}" style="width: 100%; height: 44px; padding: 0 12px;" required="true">
+                                                                <f:selectItems value="#{artistasAdministradorController.listaGeneros}" var="genero" itemLabel="#{genero.nombre}" itemValue="#{genero.id}" />
+                                                            </h:selectOneMenu>
+
                                                         </fieldset>
-                                                    </div>-->
+
+                                                    </div>        
+
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
+
                                                         <fieldset>
-                                                            <p:outputLabel for="genero-id" value="Género musical:" />
-                                                            <p:selectOneRadio id="genero-id" value="#{artistasAdministradorController.artista.generoId}" layout="responsive" columns="3" required="true">
-                                                                <f:selectItems value="#{artistasAdministradorController.listaGeneros}" var="c" itemLabel="#{c.nombre}" itemValue="#{c.id}"/>
-                                                            </p:selectOneRadio>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>
+
+                                                            <!-- Imagen --> 
                                                             <p:outputLabel for="imagen" value="Imagen: " style="display: block;" />                                                            
-                                                            <p:fileUpload id="imagen" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true"/>
+                                                            <p:fileUpload id="imagen" value="#{artistasAdministradorController.imagen}" mode="simple" skinSimple="true" required="true" />
+
                                                         </fieldset>
+
                                                     </div>                                                    
                                                     <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
                                                         <fieldset>
@@ -282,14 +294,14 @@
 
 
         <script language = "text/Javascript">
-            cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-            function clearField(t) {                   //declaring the array outside of the
-                if (!cleared[t.id]) {                      // function makes it static and global
-                    cleared[t.id] = 1;  // you could use true and false, but that's more typing
-                    t.value = '';         // with more chance of typos
-                    t.style.color = '#fff';
-                }
-            }
+                                                                    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+                                                                    function clearField(t) {                   //declaring the array outside of the
+                                                                        if (!cleared[t.id]) {                      // function makes it static and global
+                                                                            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                                                                            t.value = '';         // with more chance of typos
+                                                                            t.style.color = '#fff';
+                                                                        }
+                                                                    }
         </script>
 
     </h:body>
