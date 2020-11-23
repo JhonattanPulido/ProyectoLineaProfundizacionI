@@ -31,6 +31,11 @@ public class Carrito implements Serializable{
     private short tipoVentaId;
     
     /**
+     * Descripcion de la compra
+     */
+    private String descripcion;
+    
+    /**
      * Tipo de venta del carrito
      */
     private TipoVenta tipoVenta;
@@ -70,6 +75,14 @@ public class Carrito implements Serializable{
 
     public void setTipoVenta(TipoVenta tipoVenta) {
         this.tipoVenta = tipoVenta;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
     

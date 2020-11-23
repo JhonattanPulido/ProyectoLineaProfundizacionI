@@ -87,9 +87,11 @@
                                                                     <h:outputText value="#{car.precio}" />
                                                                 </p:column>
                                                                 <p:column headerText="Tipo de venta">
-                                                                    <h:outputText value="#{car.tipoVentaId}" />
+                                                                    <h:outputText value="#{car.tipoVenta.nombre}" />
                                                                 </p:column>
-                                                               
+                                                               <p:column headerText="Descripcion">
+                                                                   <h:outputText value="#{car.descripcion}" />
+                                                                </p:column>
                                                             </p:dataTable>
                                                             
                                                         </fieldset>                                                

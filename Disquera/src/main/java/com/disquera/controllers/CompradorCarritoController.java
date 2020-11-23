@@ -44,9 +44,9 @@ public class CompradorCarritoController implements Serializable {
     private List<Carrito> listaCarrito;
     
     /**
-     * Variable auxiliar comprar
+     * Lista auxiliar de comprar
      */
-    private boolean comprar;
+    private List<Carrito> listaCompras;
     
      /**
      * Constructor
@@ -56,7 +56,6 @@ public class CompradorCarritoController implements Serializable {
         carrito = new Carrito();  
         listaCarrito = new LCarrito().leerCarrito();
         listaVenta = new LTipoVenta().leerTipoVenta();
-        comprar = false;
     }
     
     /**
@@ -95,6 +94,15 @@ public class CompradorCarritoController implements Serializable {
     public void setListaCarrito(List<Carrito> listaCarrito) {
         this.listaCarrito = listaCarrito;
     }
+
+    public List<Carrito> getListaCompras() {
+        return listaCompras;
+    }
+
+    public void setListaCompras(List<Carrito> listaCompras) {
+        this.listaCompras = listaCompras;
+    }
+    
     
     
 }
