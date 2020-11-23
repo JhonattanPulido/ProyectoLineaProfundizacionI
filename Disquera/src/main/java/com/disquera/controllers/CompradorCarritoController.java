@@ -43,6 +43,11 @@ public class CompradorCarritoController implements Serializable {
      */
     private List<Carrito> listaCarrito;
     
+    /**
+     * Variable auxiliar comprar
+     */
+    private boolean comprar;
+    
      /**
      * Constructor
      */
@@ -51,12 +56,13 @@ public class CompradorCarritoController implements Serializable {
         carrito = new Carrito();  
         listaCarrito = new LCarrito().leerCarrito();
         listaVenta = new LTipoVenta().leerTipoVenta();
+        comprar = false;
     }
     
     /**
      * Crear nuevo carrito     
      */
-    public void crearArtista() {            
+    public void crearCarrito() {            
         
         if (new LCarrito().crearCarrito(carrito))
             System.out.println("Creado");

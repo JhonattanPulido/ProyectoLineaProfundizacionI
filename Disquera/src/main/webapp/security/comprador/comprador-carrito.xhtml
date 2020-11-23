@@ -21,7 +21,7 @@
       <h:body>
 
         <!-- ***** Preloader Start ***** -->
-        <div id="preloader">
+        <div id="preloaders">
             <div class="jumper">
                 <div></div>
                 <div></div>
@@ -38,7 +38,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <div class="collapse navbar-collapse" id="navbarResponsives">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="comprador-venta.xhtml">Venta
@@ -58,13 +58,54 @@
         </header>
 
         <!-- Page Content -->
-        <div class="page-heading products-heading-comprador header-text">
+<div class="products">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="text-content">
-                            <h4>Productos</h4>
-                            <h2>Carrito</h2>
+                        <div class="filters">
+                            <ul>
+                                <li class="active">Albumes-Canciones</li>                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="send-message" style="margin: 0 auto; padding: 40px 20px; background-color: #fff; border-radius: 8px;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">                                    
+                                    <div>
+                                        <div class="contact-form">
+                                            <h:form id="lista-ventas">
+                                                <p:growl id="grow4" showDetail="true" sticky="true" /> 
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                                        <fieldset>
+                                                            <p:dataTable var="car" value="#{compradorCarritoController.listaCarrito}">
+                                                                <p:column headerText="Carrito">
+                                                                    <h:outputText value="#{car.id}" />
+                                                                </p:column>
+                                                                <p:column headerText="Precio">
+                                                                    <h:outputText value="#{car.precio}" />
+                                                                </p:column>
+                                                                <p:column headerText="Tipo de venta">
+                                                                    <h:outputText value="#{car.tipoVentaId}" />
+                                                                </p:column>
+                                                               
+                                                            </p:dataTable>
+                                                            
+                                                        </fieldset>                                                
+                                                    </div>
+                                                     <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
+                                                        <fieldset>
+                                                            <p:commandButton id="boton-comprar" class="filled-button"  update="@form cars1" action="#{compradorCarritoController.crearCarrito()}" value="Comprar" validateClient="true" ajax="false" />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
