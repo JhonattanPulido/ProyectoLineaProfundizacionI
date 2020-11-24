@@ -40,6 +40,11 @@ public class Carrito implements Serializable{
      */
     private boolean estadoCompra;
     
+        /**
+     * Genero del artista
+     */
+    private Album album;  
+    
 
     //Constructor
     public Carrito() {
@@ -85,6 +90,14 @@ public class Carrito implements Serializable{
 
     public void setEstadoCompra(boolean estadoCompra) {
         this.estadoCompra = estadoCompra;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
    

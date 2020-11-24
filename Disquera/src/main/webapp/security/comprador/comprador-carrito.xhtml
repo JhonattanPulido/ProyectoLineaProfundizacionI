@@ -80,17 +80,14 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
                                                             <p:dataTable var="car" value="#{compradorCarritoController.listaCarrito}">
-                                                                <p:column headerText="Carrito">
-                                                                    <h:outputText value="#{car.id}" />
+                                                                <p:column headerText="Album">
+                                                                    <h:outputText value="#{car.album.nombre}" />
                                                                 </p:column>
                                                                 <p:column headerText="Precio">
                                                                     <h:outputText value="#{car.precio}" />
                                                                 </p:column>
-                                                                <p:column headerText="Tipo de venta">
-                                                                    <h:outputText value="#{car.tipoVenta.nombre}" />
-                                                                </p:column>
                                                                <p:column headerText="Descripcion">
-                                                                   <h:outputText value="#{car.descripcion}" />
+                                                                   <h:outputText value="#{car.album.listaCanciones}" />
                                                                 </p:column>
                                                             </p:dataTable>
                                                             

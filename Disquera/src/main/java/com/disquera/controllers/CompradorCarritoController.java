@@ -2,7 +2,9 @@
 package com.disquera.controllers;
 
 //Librerias
+import com.disquera.logic.LAlbum;
 import com.disquera.logic.LCarrito;
+import com.disquera.models.Album;
 import com.disquera.models.Carrito;
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,6 +29,7 @@ public class CompradorCarritoController implements Serializable {
      */
     private Carrito carrito;
     
+    
     /**
      * estado de la compra
      */
@@ -45,7 +48,7 @@ public class CompradorCarritoController implements Serializable {
     /**
      * Lista auxiliar de comprar
      */
-    private List<Carrito> listaCompras;
+    private List<Album> listaAlbumes;
     
      /**
      * Constructor
@@ -55,6 +58,7 @@ public class CompradorCarritoController implements Serializable {
         carrito = new Carrito();  
         listaCarrito = new LCarrito().leerCarrito();
         estadoCompra = false;
+        listaAlbumes = new LAlbum().leerAlbum();
         
     }
     
@@ -92,12 +96,21 @@ public class CompradorCarritoController implements Serializable {
         this.listaCarrito = listaCarrito;
     }
 
-    public List<Carrito> getListaCompras() {
-        return listaCompras;
+    public List<Album> getListaAlbumes() {
+        return listaAlbumes;
     }
 
-    public void setListaCompras(List<Carrito> listaCompras) {
-        this.listaCompras = listaCompras;
+    public void setListaAlbumes(List<Album> listaAlbumes) {
+        this.listaAlbumes = listaAlbumes;
+    }
+
+
+    public boolean isEstadoCompra() {
+        return estadoCompra;
+    }
+
+    public void setEstadoCompra(boolean estadoCompra) {
+        this.estadoCompra = estadoCompra;
     }
     
     
