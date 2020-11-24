@@ -5,9 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        
+
         <title>Disquera SJ | Ver álbum</title>
-        
+
         <!--<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet" />-->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -15,11 +15,11 @@
         <link rel="stylesheet" href="../../assets/css/fontawesome.css" />
         <link rel="stylesheet" href="../../assets/css/templatemo-sixteen.css" />
         <link rel="stylesheet" href="../../assets/css/owl.css" />
-        
+
     </h:head>       
-    
+
     <h:body>                
-        
+
         <!-- ***** Preloader Start ***** -->
         <div id="preloader">
             <div class="jumper">
@@ -51,6 +51,7 @@
                             <li class="nav-item">
                                 <h:form>
                                     <p:commandButton class="nav-link" action="#{artistasAdministradorController.cerrarSesion()}" value="Cerrar sesión" />
+                                    <h:outputText value="#{actualizarAlbumAdministrador}" style="display: none;" />
                                 </h:form> 
                             </li>                            
                         </ul>
@@ -72,39 +73,65 @@
                 </div>
             </div>
         </div>
-        
-        <div class="best-features about-features">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-heading">
-                            <h2>Detalles</h2>
-                        </div>
-                    </div>
-                    <h:form>
-                        <h:outputText value="#{actualizarAlbumAdministrador}" style="display: none;" />
+        <h:form>
+            <div class="best-features about-features">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-heading">
+                                <h2>Detalles</h2>
+                            </div>
+                        </div>                                            
                         <div class="col-md-6">
                             <div class="right-image">
-                                <img src="../../#{actualizarAlbumAdministrador.album.artista.imagen}" alt="" />
+                                <img src="../..#{actualizarAlbumAdministrador.album.artista.imagen}" alt="" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="left-content">                            
-                                <h4>#{actualizarAlbumAdministrador.album.artista.nombre}</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed voluptate nihil eum consectetur similique? Consectetur, quod, incidunt, harum nisi dolores delectus reprehenderit voluptatem perferendis dicta dolorem non blanditiis ex fugiat. Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/><br/>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti eum ratione ex ea praesentium quibusdam? Aut, in eum facere corrupti necessitatibus perspiciatis quis.</p>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                                </ul>
+                                <h4>
+                                    <h:outputText value="#{actualizarAlbumAdministrador.album.artista.nombre}" />                            
+                                </h4>
+                                <p>
+                                    <strong style="font-weight: bold;">Nacionalidad: </strong>
+                                    #{actualizarAlbumAdministrador.album.artista.nacionalidad}
+                                    <br/>
+                                    <strong style="font-weight: bold;">Género musical: </strong>
+                                    #{actualizarAlbumAdministrador.album.artista.genero.nombre}
+                                </p>                                
+                                <h4>
+                                    Álbum: 
+                                    <h:outputText value="#{actualizarAlbumAdministrador.album.nombre}" />                            
+                                </h4>
+                                <p>
+                                    <strong style="font-weight: bold;">Precio: </strong>
+                                    $ #{actualizarAlbumAdministrador.album.precio}
+                                    <br/>
+                                    <strong style="font-weight: bold;">Cantidad de canciones: </strong>
+                                    #{actualizarAlbumAdministrador.album.listaCanciones.size()}
+                                    <strong style="font-weight: bold;">Cantidad de canciones: </strong>                                    
+                                </p> 
                             </div>
-                        </div>
-                    </h:form>                        
+                        </div>                                       
+                    </div>
                 </div>
             </div>
-        </div>
+        </h:form> 
         
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-content">
+                            <p>Copyright &copy; 2020 Disquera SJ Co., Ltd.
+
+                                - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
         <!-- Bootstrap core JavaScript -->
         <script src="../../vendor/jquery/jquery.min.js"></script>
         <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -128,7 +155,7 @@
                 }
             }
         </script>
-        
+
     </h:body>
 </html>
 

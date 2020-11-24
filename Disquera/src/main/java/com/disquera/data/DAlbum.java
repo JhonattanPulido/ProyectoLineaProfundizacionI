@@ -208,6 +208,8 @@ public class DAlbum implements Serializable {
                 genero.setNombre(respuesta.getString("artista_genero_musical_nombre"));
                 artista.setGenero(genero);
                 
+                album.setArtista(artista);
+                
                 JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
                 
                 for (short i = 0; i < JSONCanciones.length(); i++)  

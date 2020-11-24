@@ -32,7 +32,7 @@ public class ActualizarAlbumAdministrador implements Serializable {
                         
         Map params = FacesContext. getCurrentInstance().getExternalContext().getRequestParameterMap();                  
         album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString())); 
-        System.out.println("DETALLE: " + album.getNombre());
+        System.out.println("DETALLE: " + album.getArtista().getNombre());
     }       
 
     // Métodos
