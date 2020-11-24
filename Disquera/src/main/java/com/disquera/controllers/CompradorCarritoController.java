@@ -4,6 +4,7 @@ package com.disquera.controllers;
 //Librerias
 import com.disquera.logic.LCarrito;
 import com.disquera.models.Carrito;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -25,6 +26,11 @@ public class CompradorCarritoController implements Serializable {
      * Almacena los datos de un carrito nuevo
      */
     private Carrito carrito;
+    
+    /**
+     * estado de la compra
+     */
+    private boolean estadoCompra;
         
     /**
      * Faces context
@@ -48,6 +54,8 @@ public class CompradorCarritoController implements Serializable {
      
         carrito = new Carrito();  
         listaCarrito = new LCarrito().leerCarrito();
+        estadoCompra = false;
+        
     }
     
     /**
@@ -61,6 +69,11 @@ public class CompradorCarritoController implements Serializable {
             System.out.println("No creado");
     }  
     
+    
+    public void redireccionarAlbum(short albumId) throws IOException {    
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("comprador-album-detalle.xhtml?albumId=" + albumId);
+    }
     //Metodos Set & Get
 
     public Carrito getCarrito() {
