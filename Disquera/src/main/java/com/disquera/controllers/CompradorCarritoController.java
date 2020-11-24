@@ -3,9 +3,7 @@ package com.disquera.controllers;
 
 //Librerias
 import com.disquera.logic.LCarrito;
-import com.disquera.logic.LTipoVenta;
 import com.disquera.models.Carrito;
-import com.disquera.models.TipoVenta;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -31,12 +29,7 @@ public class CompradorCarritoController implements Serializable {
     /**
      * Faces context
      */
-    private FacesContext facesContext;                 
-    
-    /**
-     * Lista de tipo venta almacenados en base de datos
-     */
-    private List<TipoVenta> listaVenta;
+    private FacesContext facesContext;      
     
     /**
      * Lista de Carrito almacenados en base de datos
@@ -55,7 +48,6 @@ public class CompradorCarritoController implements Serializable {
      
         carrito = new Carrito();  
         listaCarrito = new LCarrito().leerCarrito();
-        listaVenta = new LTipoVenta().leerTipoVenta();
     }
     
     /**
@@ -77,14 +69,6 @@ public class CompradorCarritoController implements Serializable {
 
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
-    }
-
-    public List<TipoVenta> getListaVenta() {
-        return listaVenta;
-    }
-
-    public void setListaVenta(List<TipoVenta> listaVenta) {
-        this.listaVenta = listaVenta;
     }
 
     public List<Carrito> getListaCarrito() {

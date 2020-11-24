@@ -21,24 +21,25 @@ public class Carrito implements Serializable{
     
     
     /**
-     * Precio del carrito
+     * Id del album
+     */
+    private short albumId;
+    
+    /**
+     * Canciones
+     */
+    private String canciones;
+    
+    /**
+     * precio de la compra
      */
     private double precio;
     
     /**
-     * Id del Tipo de venta
+     * estado de la compra
      */
-    private short tipoVentaId;
+    private boolean estadoCompra;
     
-    /**
-     * Descripcion de la compra
-     */
-    private String descripcion;
-    
-    /**
-     * Tipo de venta del carrito
-     */
-    private TipoVenta tipoVenta;
 
     //Constructor
     public Carrito() {
@@ -53,6 +54,23 @@ public class Carrito implements Serializable{
         this.id = id;
     }
 
+    public short getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(short albumId) {
+        this.albumId = albumId;
+    }
+
+
+    public String getCanciones() {
+        return canciones;
+    }
+
+    public void setCanciones(String canciones) {
+        this.canciones = canciones;
+    }
+
     public double getPrecio() {
         return precio;
     }
@@ -61,29 +79,14 @@ public class Carrito implements Serializable{
         this.precio = precio;
     }
 
-    public short getTipoVentaId() {
-        return tipoVentaId;
+    public boolean isEstadoCompra() {
+        return estadoCompra;
     }
 
-    public void setTipoVentaId(short tipoVentaId) {
-        this.tipoVentaId = tipoVentaId;
+    public void setEstadoCompra(boolean estadoCompra) {
+        this.estadoCompra = estadoCompra;
     }
 
-    public TipoVenta getTipoVenta() {
-        return tipoVenta;
-    }
-
-    public void setTipoVenta(TipoVenta tipoVenta) {
-        this.tipoVenta = tipoVenta;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
+   
     
 }

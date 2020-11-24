@@ -6,7 +6,6 @@
 package com.disquera.data;
 
 import com.disquera.models.Carrito;
-import com.disquera.models.TipoVenta;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -32,10 +31,6 @@ public class DCarrito implements Serializable {
      */
     private Carrito carrito;
     
-     /**
-     * Variable de auxiliar de tipo de venta
-     */
-    private TipoVenta tipoVenta;
     
     /**
      * Todas los compras almacenados en la base de datos
@@ -69,10 +64,11 @@ public class DCarrito implements Serializable {
                 "LCPzVCxRrZtS2BS"    
             );
             
-            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_compra_carrito(?,?,?) }");
-            funcion.setDouble(1, carrito.getPrecio());                          
-            funcion.setShort(2, carrito.getTipoVentaId());  
-            funcion.setString(3, carrito.getDescripcion());
+            CallableStatement funcion = dbContext.prepareCall("{ call f_crear_compra_carrito(?,?,?,?) }");
+            funcion.setShort(1, carrito.getAlbumId());                          
+            funcion.setString(2, carrito.getCanciones());  
+            funcion.setDouble(3, carrito.getPrecio());
+            funcion.setBoolean(3, carrito.isEstadoCompra());
             
             ResultSet respuesta = funcion.executeQuery();                        
             
@@ -114,14 +110,11 @@ public class DCarrito implements Serializable {
             
                 carrito = new Carrito();                
                 carrito.setId(respuesta.getShort("id"));
-                carrito.setPrecio(respuesta.getDouble("precio"));               
-                carrito.setTipoVentaId(respuesta.getShort("tipo_venta_id"));   
-                carrito.setDescripcion(respuesta.getString("descripcion"));
-                
-                tipoVenta = new TipoVenta();
-                tipoVenta.setId(respuesta.getShort("tipo_venta_id"));
-                tipoVenta.setNombre(respuesta.getString("tipo_venta_nombre"));
-                carrito.setTipoVenta(tipoVenta);
+                carrito.setAlbumId(respuesta.getShort("album_id"));               
+                carrito.setCanciones(respuesta.getString("canciones"));   
+                carrito.setPrecio(respuesta.getDouble("precio"));
+                carrito.setEstadoCompra(respuesta.getBoolean("estado_compra"));
+               
                 
                 listaCarrito.add(carrito);
             }
