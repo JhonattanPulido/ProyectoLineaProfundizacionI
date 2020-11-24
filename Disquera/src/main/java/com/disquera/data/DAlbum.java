@@ -135,7 +135,8 @@ public class DAlbum implements Serializable {
                 artista.setNacionalidad(respuesta.getString("artista_nacionalidad"));
                 artista.setFechaNacimiento(respuesta.getDate("artista_fecha_nacimiento"));
                 artista.setImagen(respuesta.getString("artista_imagen"));
-                artista.setGeneroId(respuesta.getShort("artista_genero_musical_id"));     
+                artista.setGeneroId(respuesta.getShort("artista_genero_musical_id"));
+                album.setArtista(artista);
                 
                 genero = new Genero();
                 genero.setId(respuesta.getShort("artista_genero_musical_id"));
@@ -190,10 +191,11 @@ public class DAlbum implements Serializable {
                 
                 album = new Album();                
                 album.setId(respuesta.getShort("id"));
-                album.setNombre(respuesta.getString("imagen"));
+                album.setNombre(respuesta.getString("nombre"));
                 album.setPrecio(respuesta.getDouble("precio"));           
                 album.setArtistaId(respuesta.getShort("artista_id"));  
                 
+                artista = new Artista();
                 artista.setId(respuesta.getShort("artista_id"));
                 artista.setNombre(respuesta.getString("artista_nombre"));
                 artista.setNacionalidad(respuesta.getString("artista_nacionalidad"));
@@ -214,7 +216,8 @@ public class DAlbum implements Serializable {
             
             return album;
             
-        } catch (SQLException ex) {        
+        } catch (SQLException ex) {   
+            System.out.println("ERROR: " + ex);
             return null;
         }
     }

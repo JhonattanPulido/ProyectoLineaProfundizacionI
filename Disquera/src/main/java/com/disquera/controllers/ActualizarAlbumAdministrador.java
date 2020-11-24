@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Paquetes
 package com.disquera.controllers;
-
 import com.disquera.logic.LAlbum;
+
+// Modelos
 import com.disquera.models.Album;
+
+// Librerías
 import java.io.Serializable;
 import java.util.Map;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -20,29 +18,32 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "actualizarAlbumAdministrador")
 @ViewScoped
-public class ActualizarAlbumAdministrador implements Serializable {
-
-    private short albumId;
+public class ActualizarAlbumAdministrador implements Serializable {        
     
+    /**
+     * Almacena los datos del álbum
+     */
     private Album album;
     
     /**
-     * Creates a new instance of ActualizarAlbumAdministrador
+     * Constructor del controlador
      */
     public ActualizarAlbumAdministrador() {
-        FacesContext facesContext = FacesContext. getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        Map params = externalContext.getRequestParameterMap();
-        Short albumId =  Short.parseShort(params.get("albumId").toString());        
-        this.albumId = albumId;
-        album = new LAlbum().leerAlbum(this.albumId);        
+                        
+        Map params = FacesContext. getCurrentInstance().getExternalContext().getRequestParameterMap();                  
+        album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString())); 
+        System.out.println("DETALLE: " + album.getNombre());
+    }       
+
+    // Métodos
+    
+    // Métodos Set & Get
+    
+    public Album getAlbum() {
+        return album;
     }
 
-    public short getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(short albumId) {
-        this.albumId = albumId;
+    public void setAlbum(Album album) {
+        this.album = album;
     }        
 }
