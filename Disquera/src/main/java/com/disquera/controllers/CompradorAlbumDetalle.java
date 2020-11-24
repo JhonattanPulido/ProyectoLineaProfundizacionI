@@ -1,27 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Paquetes
 package com.disquera.controllers;
 
+//Librerias
 import com.disquera.logic.LAlbum;
 import com.disquera.models.Album;
+import java.io.Serializable;
 import java.util.Map;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
- *
- * @author Acer
+ * Controlador de album detalle para comprador
+ * @author Sandra Moreno - Jhonattan Pulido
+ * @version 1.0.0
+ * @since 20/11/2020
  */
-public class CompradorAlbumDetalle {
+@Named(value = "compradorAlbumDetalle")
+@ViewScoped
+public class CompradorAlbumDetalle implements Serializable {
 
     private Album album;
 
     public CompradorAlbumDetalle() {
         Map params = FacesContext. getCurrentInstance().getExternalContext().getRequestParameterMap();                  
-        album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString()));
-    }
+        album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString())); 
+   }
 
     
     public Album getAlbum() {

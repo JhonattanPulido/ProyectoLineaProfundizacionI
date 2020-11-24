@@ -5,6 +5,7 @@
  */
 package com.disquera.data;
 
+import com.disquera.models.Album;
 import com.disquera.models.Carrito;
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -31,7 +32,10 @@ public class DCarrito implements Serializable {
      */
     private Carrito carrito;
     
-    
+        /**
+     * Variable auxiliar de Album
+     */
+    private Album album;
     /**
      * Todas los compras almacenados en la base de datos
      */
@@ -100,7 +104,7 @@ public class DCarrito implements Serializable {
                 "LCPzVCxRrZtS2BS"    
             );
             
-            CallableStatement funcion = dbContext.prepareCall("{ call f_leer_carrito_compras() }");
+            CallableStatement funcion = dbContext.prepareCall("{ call f_leer_carrito() }");
             
             ResultSet respuesta = funcion.executeQuery();
             
@@ -114,7 +118,11 @@ public class DCarrito implements Serializable {
                 carrito.setCanciones(respuesta.getString("canciones"));   
                 carrito.setPrecio(respuesta.getDouble("precio"));
                 carrito.setEstadoCompra(respuesta.getBoolean("estado_compra"));
-               
+                
+                album = new Album();
+                album.setId(respuesta.getShort("album_id"));
+                album.setNombre(respuesta.getString("album_nombre"));
+                carrito.setAlbum(album);
                 
                 listaCarrito.add(carrito);
             }
