@@ -86,24 +86,17 @@
                                 <h4>
                                     <h:outputText value="#{compradorAlbumDetalle.album.artista.nombre}" />                            
                                 </h4>
-                                <p>
-                                    <strong style="font-weight: bold;">Nacionalidad: </strong>
-                                    #{compradorAlbumDetalle.album.artista.nacionalidad}
-                                    <br/>
-                                    <strong style="font-weight: bold;">Género musical: </strong>
-                                    #{compradorAlbumDetalle.album.artista.genero.nombre}
-                                </p>                                
-                                <h4>
-                                    Álbum: 
-                                    <h:outputText value="#{compradorAlbumDetalle.album.nombre}" />                            
-                                </h4>
-                                <p>
-                                    <strong style="font-weight: bold;">Precio: </strong>
-                                    $ #{compradorAlbumDetalle.album.precio}
-                                    <br/>
-                                    <strong style="font-weight: bold;">Cantidad de canciones: </strong>
-                                    #{compradorAlbumDetalle.album.listaCanciones.size()}                                
-                                </p> 
+                                <p:dataTable var="cancion" value="#{albumAdministradorController.album.listaCanciones}">
+
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{cancion.nombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Precio">
+                                        <h:outputText value="#{cancion.precio}" />
+                                    </p:column>
+
+                                </p:dataTable>
                             </div>
                         </div>                                       
                     </div>
