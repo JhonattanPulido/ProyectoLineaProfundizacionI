@@ -90,6 +90,9 @@ public class AlbumAdministradorController implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No ha agregado canciones"));
     }        
 
+    /**
+     * Agregar una cación a un álbum
+     */
     public void agregarCancion() {            
         album.getListaCanciones().add(new Cancion(cancion.getNombre(), cancion.getPrecio()));        
         calcularPrecioAlbum();                
@@ -159,16 +162,13 @@ public class AlbumAdministradorController implements Serializable {
         new LIniciarSesion().cerrarSesion();
         facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
-    }
+    }        
     
     /**
-     * Actualizar álbum     
+     * Redireccionar a la página de actualizar canciones
+     * @param albumId - Id del álbum que se desea editar
+     * @throws IOException 
      */
-    public void actualizarAlbum(CellEditEvent event) {
-    
-        
-    }
-    
     public void redireccionar(short albumId) throws IOException {    
         facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("admin-actualizar-album.xhtml?albumId=" + albumId);
