@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  *
@@ -226,7 +225,7 @@ public class DAlbum implements Serializable {
     
        
     /**
-     * Actualizar un aalbum
+     * Actualizar un álbum
      * @param album
      * @return true si el album se actualizó correctamente
      */
@@ -247,16 +246,53 @@ public class DAlbum implements Serializable {
             );
             
             CallableStatement funcion = dbContext.prepareCall("{ call f_actualizar_album(?,?,?) }");
-            funcion.setString(1, album.getNombre());
-            funcion.setDouble(2, album.getPrecio());  
+            funcion.setShort(1, album.getId());
+            funcion.setString(2, album.getNombre());  
             funcion.setShort(3, album.getArtistaId());
             
             ResultSet respuesta = funcion.executeQuery();                        
             
-            return respuesta.getBoolean(0);
+            return true;
             
         } catch (SQLException ex) {        
             return false;
         }                
+    }
+    
+    /**
+     * Actualizar canciones de un álbum
+     * @param album
+     * @param JSONCanciones
+     * @return true si se actualizan correctamente los datos
+     */
+    public boolean actualizarCancionesAlbum(Album album, String JSONCanciones) {
+    
+        try {
+            
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            
+            dbContext = DriverManager.getConnection(
+                "jdbc:postgresql://proyecto-turismo-produccion-database.cuw9stbxwsmg.us-east-2.rds.amazonaws.com:5432/disquera",
+                "p_turismo_master",
+                "LCPzVCxRrZtS2BS"    
+            );
+            
+            CallableStatement funcion = dbContext.prepareCall("{ call f_actualizar_album(?,?,?) }");
+            funcion.setShort(1, album.getId());
+            funcion.setDouble(2, album.getPrecio());  
+            funcion.setString(3, JSONCanciones);
+            
+            ResultSet respuesta = funcion.executeQuery();                        
+            
+            return true;
+        
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex);
+            return false;
+        }
     }
 }

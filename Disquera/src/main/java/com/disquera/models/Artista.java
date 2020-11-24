@@ -3,8 +3,7 @@ package com.disquera.models;
 
 // Librerías
 import java.io.Serializable;
-import java.sql.Date;
-import javax.validation.constraints.Past;
+import java.util.Date;
 import javax.validation.constraints.Pattern;
 
 /**

@@ -124,6 +124,34 @@ public class AlbumAdministradorController implements Serializable {
     }
     
     /**
+     * Actualizar álbum
+     * @param event Datos actualizados del álbum
+     */
+    public void onCellEdit(CellEditEvent event) {
+    
+        Object newValue = event.getNewValue();        
+        
+        Album albumActualizado = listaAlbumes.get(event.getRowIndex());
+        
+        switch (event.getColumn().getHeaderText()) {
+            
+            case "Artista":
+                albumActualizado.setArtistaId((short) newValue);
+                break;
+                
+            case "Nombre":
+                albumActualizado.setNombre(newValue.toString());
+                break;                            
+        }
+        
+        if (new LAlbum().actualizarAlbum(albumActualizado)) {
+            listaAlbumes = new LAlbum().leerAlbum();            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Álbum", "Álbum actualizado correctamente"));
+        } else
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Álbum", "No se pudó actualizar el álbum"));
+    }
+    
+    /**
      * Cerrar sesión del usuario     
      * @throws java.io.IOException
      */

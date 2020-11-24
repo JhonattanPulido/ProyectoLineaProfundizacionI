@@ -61,4 +61,14 @@ public class LAlbum implements Serializable{
     public boolean actualizarAlbum(Album album) {
         return new DAlbum().actualizarAlbum(album);
     }
+    
+     /**
+     * Actualizar canciones de un álbum
+     * @param album
+     * @param JSONCanciones
+     * @return true si se actualizan correctamente los datos
+     */
+    public boolean actualizarCancionesAlbum(Album album, String JSONCanciones) {
+        return new DAlbum().actualizarCancionesAlbum(album, JSONCanciones);
+    }
 }

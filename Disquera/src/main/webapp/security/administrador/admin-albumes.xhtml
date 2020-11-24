@@ -88,46 +88,62 @@
                                 <div class="col-md-12">                                    
                                     <div>
                                         <div class="contact-form">
-                                            <h:form id="lista-artistas">                                               
+                                            <h:form id="lista-albumes">                                               
 
-                                                <p:growl id="growl" showDetail="true" sticky="true" /> 
-
-                                                <!-- ESTE ES EL DATATABLE -->
-                                                <!--<div class="row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                                        <fieldset>
-                                                            <p:dataTable id="albumes" var="album" value="#{albumAdministradorController.listaAlbumes}" editable="true" editMode="cell" widgetVar="cellAlbumes">
-                                                                <f:facet name="header">
-                                                                    Cell Editing with Click and RightClick
-                                                                </f:facet>
-                                                                <p:ajax event="cellEdit" listener="#{dtEditView.onCellEdit}" update=":lista-artistas:grow1" />
-                                                            </p:dataTable>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>-->
+                                                <p:growl id="growl" showDetail="true" sticky="true" />                                                
 
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:dataTable var="album" value="#{albumAdministradorController.listaAlbumes}">
-                                                                <p:column headerText="Id">
-                                                                    <h:outputText value="#{album.id}" />
+                                                            <p:dataTable id="albumes" var="album" value="#{albumAdministradorController.listaAlbumes}" editable="true" style="margin-bottom:20px"  editMode="cell" widgetVar="cellAlbumes"
+                                                                rows="10"
+                                                                paginator="true"
+                                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                                                rowsPerPageTemplate="5,10,15"
+                                                                emptyMessage="No se encontraron álbumes">
+                                                                
+                                                                <p:ajax event="cellEdit" listener="#{albumAdministradorController.onCellEdit}" update=":lista-albumes:growl" />
+                                                                
+                                                                <!-- Id --> 
+                                                                <p:column headerText="Id">                                                                    
+                                                                    <h:outputText value="#{album.id}" />                                                                                                                                        
                                                                 </p:column>
 
+                                                                <!-- ID Artista -->
                                                                 <p:column headerText="Artista">
-                                                                    <h:outputText value="#{album.artista.nombre}" />
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output">
+                                                                            <h:outputText value="#{album.artista.nombre}" />
+                                                                        </f:facet>
+                                                                        <f:facet name="input">
+                                                                            <h:selectOneMenu value="#{album.artistaId}" style="width:100%">
+                                                                                <f:selectItems value="#{albumAdministradorController.listaArtista}" var="artista" itemLabel="#{artista.nombre}" itemValue="#{artista.id}" />
+                                                                            </h:selectOneMenu>
+                                                                        </f:facet>
+                                                                    </p:cellEditor>                                                                    
                                                                 </p:column>  
                                                                 
+                                                                <!-- Nombre -->
                                                                 <p:column headerText="Nombre">
-                                                                    <h:outputText value="#{album.nombre}" />
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output">
+                                                                            <h:outputText value="#{album.nombre}" />
+                                                                        </f:facet>  
+                                                                        <f:facet name="input">
+                                                                            <p:inputText value="#{album.nombre}" style="width:100%" />
+                                                                        </f:facet>
+                                                                    </p:cellEditor>
                                                                 </p:column>
 
-                                                                <p:column headerText="Precio">
-                                                                    <h:outputText value="#{album.precio}" />
+                                                                <!-- Precio -->
+                                                                <p:column headerText="Precio">                                                                    
+                                                                    <h:outputText value="#{album.precio}" />                                                                                                                                         
                                                                 </p:column>                                                                
 
                                                                 <p:column headerText="Canciones">
                                                                     <p:dataTable var="cancion" value="#{album.listaCanciones}">
+                                                                        
                                                                         <p:column headerText="Nombre">
                                                                             <h:outputText value="#{cancion.nombre}" />
                                                                         </p:column>
@@ -139,11 +155,17 @@
                                                                     </p:dataTable>
                                                                 </p:column>
                                                                 
-                                                                <p:column headerText="Ver">
-                                                                    <h:commandButton action="#{albumAdministradorController.redireccionar(album.id)}" value="Ver" />
+                                                                <p:column headerText="Detalle">
+                                                                    <p:commandButton action="#{albumAdministradorController.redireccionar(album.id)}" value="Ver detalles" />                                                                        
                                                                 </p:column>
                                                                 
                                                             </p:dataTable>
+                                                            
+                                                            <p:contextMenu for="albumes" widgetVar="cMenu">   
+                                                                <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellAlbumes').showCellEditor();return false;"/>  
+                                                                <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+                                                            </p:contextMenu> 
+                                                            
                                                         </fieldset>                                                
                                                     </div>
                                                 </div>
@@ -212,7 +234,7 @@
 
                                                     <div class="col-lg-12" style="display: center; flex-flow: row-reverse; ">
                                                         <fieldset>
-                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form lista-artistas :otro:canciones" actionListener="#{albumAdministradorController.crearAlbum()}" ajax="true" value="Guardar" validateClient="true" />
+                                                            <p:commandButton id="boton-submit" class="filled-button"  update="@form lista-albumes :otro:canciones" actionListener="#{albumAdministradorController.crearAlbum()}" ajax="true" value="Guardar" validateClient="true" />
                                                         </fieldset>
                                                     </div>
                                                 </div>
