@@ -6,6 +6,7 @@
 package com.disquera.data;
 
 import com.disquera.models.Album;
+import com.disquera.models.Cancion;
 import com.disquera.models.Carrito;
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
 
 /**
  *
@@ -72,7 +74,7 @@ public class DCarrito implements Serializable {
             funcion.setShort(1, carrito.getAlbumId());                          
             funcion.setString(2, carrito.getCanciones());  
             funcion.setDouble(3, carrito.getPrecio());
-            funcion.setBoolean(4, carrito.isEstadoCompra());
+            funcion.setBoolean(4, false);
             
             ResultSet respuesta = funcion.executeQuery();                        
             
@@ -115,13 +117,19 @@ public class DCarrito implements Serializable {
                 carrito = new Carrito();                
                 carrito.setId(respuesta.getShort("id"));
                 carrito.setAlbumId(respuesta.getShort("album_id"));               
-                carrito.setCanciones(respuesta.getString("canciones"));   
+                //carrito.setCanciones(respuesta.getString("canciones"));   
                 carrito.setPrecio(respuesta.getDouble("precio"));
                 carrito.setEstadoCompra(respuesta.getBoolean("estado_compra"));
                 
                 album = new Album();
                 album.setId(respuesta.getShort("album_id"));
-                album.setNombre(respuesta.getString("album_nombre"));
+                album.setNombre(respuesta.getString("album_nombre"));                
+                
+                JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
+                
+                for (short i = 0; i < JSONCanciones.length(); i++)  
+                    album.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
+                
                 carrito.setAlbum(album);
                 
                 listaCarrito.add(carrito);

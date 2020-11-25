@@ -50,6 +50,10 @@ public class CompradorCarritoController implements Serializable {
      */
     private List<Album> listaAlbumes;
     
+    /**
+     * 
+     */
+    
      /**
      * Constructor
      */
@@ -65,7 +69,7 @@ public class CompradorCarritoController implements Serializable {
     /**
      * Crear nuevo carrito     
      */
-    public void crearCarrito() {            
+    public void crearCarrito() {                            
         
         if (new LCarrito().crearCarrito(carrito))
             System.out.println("Creado");
