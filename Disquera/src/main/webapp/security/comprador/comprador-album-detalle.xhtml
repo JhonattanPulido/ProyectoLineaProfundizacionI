@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <h:form>
+        <h:form id="form">
             <div class="best-features about-features">
                 <div class="container">
                     <div class="row">
@@ -89,7 +89,7 @@
                                 <h4>
                                     <h:outputText value="#{compradorAlbumDetalle.album.artista.nacionalidad}" />                            
                                 </h4>
-                                <p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" 
+                                <!--<p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" 
                                              emptyMessage="No se han agregado canciones">
                                     <f:facet name="header">
                                         Canciones agregadas
@@ -100,11 +100,19 @@
                                     <p:column headerText="Precio">
                                         <h:outputText value="$ #{cancion.precio}" />
                                     </p:column>                                                    
-                                </p:dataTable> 
+                                </p:dataTable> -->
+                                <p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" selectionMode="multiple" selection="#{compradorAlbumDetalle.listaCanciones}" rowKey="#{cancion.nombre}">                                    
+                                    <p:column headerText="Id">
+                                        <h:outputText value="#{cancion.nombre}" />
+                                    </p:column>
+                                    <p:column headerText="Year">
+                                        <h:outputText value="#{cancion.precio}" />
+                                    </p:column>                                                                        
+                                </p:dataTable>
                             </div>
                             <div class="col-lg-12" style="display: flex; flex-flow: row-reverse; margin-bottom: 30px;">
                                 <fieldset>     
-                                 
+
                                     <h:outputText id="precio-total" value="$ #{compradorAlbumDetalle.album.precio}" />
                                     <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{compradorAlbumDetalle.crearCarrito()}" ajax="true" value="Comprar" update="@form" validateClient="true" />
 
@@ -115,7 +123,7 @@
                 </div>
             </div>
         </h:form> 
-        
+
         <footer>
             <div class="container">
                 <div class="row">

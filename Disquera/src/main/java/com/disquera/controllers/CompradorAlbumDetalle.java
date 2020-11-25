@@ -5,14 +5,17 @@ package com.disquera.controllers;
 import com.disquera.logic.LAlbum;
 import com.disquera.logic.LCarrito;
 import com.disquera.models.Album;
+import com.disquera.models.Cancion;
 import com.disquera.models.Carrito;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import org.json.JSONArray;
 
 /**
  * Controlador de album detalle para comprador
@@ -27,6 +30,10 @@ public class CompradorAlbumDetalle implements Serializable {
     private Album album;
     
 
+    /**
+     * Lista de canciones seleccionadas por el usuario
+     */
+    private List<Cancion> listaCanciones;
     
      /**
      * Almacena los datos de un carrito nuevo
@@ -62,24 +69,36 @@ public class CompradorAlbumDetalle implements Serializable {
         Map params = FacesContext. getCurrentInstance().getExternalContext().getRequestParameterMap();                  
         album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString())); 
         carrito = new Carrito();  
-        listaCarrito = new LCarrito().leerCarrito();
-        estadoCompra = false;
-        listaAlbumes = new LAlbum().leerAlbum();
+        listaCanciones = new ArrayList<>();
+        //listaCarrito = new LCarrito().leerCarrito();
+        //estadoCompra = false;
+        //listaAlbumes = new LAlbum().leerAlbum();
     }
    
 
      /**
      * Crear nuevo carrito   
      */
-    public void crearCarrito() {            
-        carrito.setPrecio(album.getPrecio());
-        carrito.setAlbumId(album.getId());
-        carrito.setCanciones(album.getListaCanciones().toString());
-        if (new LCarrito().crearCarrito(carrito))
+    public void crearCarrito() {       
+        
+        if (listaCanciones.size() > 0) {
             
-            System.out.println("Creado");
-        else
-            System.out.println("No creado");
+            if (listaCanciones.size() == album.getListaCanciones().size())
+                carrito.setPrecio(album.getPrecio());
+            else
+                for (Cancion cancion: listaCanciones)
+                    carrito.setPrecio(carrito.getPrecio() + cancion.getPrecio());
+            
+            JSONArray JSONCanciones = new JSONArray(listaCanciones);
+                        
+            carrito.setAlbumId(album.getId());
+            carrito.setCanciones(JSONCanciones.toString());
+            
+            if (new LCarrito().crearCarrito(carrito))
+                System.out.println("Creado");
+            else
+                System.out.println("No creado");
+        }                    
     }  
     
     public Album getAlbum() {
@@ -121,7 +140,12 @@ public class CompradorAlbumDetalle implements Serializable {
     public void setListaAlbumes(List<Album> listaAlbumes) {
         this.listaAlbumes = listaAlbumes;
     }
-    
-    
 
+    public List<Cancion> getListaCanciones() {
+        return listaCanciones;
+    }
+
+    public void setListaCanciones(List<Cancion> listaCanciones) {
+        this.listaCanciones = listaCanciones;
+    }        
 }
