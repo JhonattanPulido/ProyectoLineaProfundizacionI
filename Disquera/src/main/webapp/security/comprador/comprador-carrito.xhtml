@@ -79,7 +79,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:dataTable var="car" value="#{compradorCarritoController.listaCarrito}">
+                                                            <p:dataTable var="car" value="#{compradoAlbumDetalle.listaCarrito}">
                                                                 <p:column headerText="Album">
                                                                     <h:outputText value="#{car.album.nombre}" />
                                                                 </p:column>
@@ -92,11 +92,6 @@
                                                             </p:dataTable>
                                                             
                                                         </fieldset>                                                
-                                                    </div>
-                                                     <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
-                                                        <fieldset>
-                                                            <p:commandButton id="boton-comprar" class="filled-button"  update="@form cars1" action="#{compradorCarritoController.crearCarrito()}" value="Comprar" validateClient="true" ajax="false" />
-                                                        </fieldset>
                                                     </div>
                                                 </div>
 
