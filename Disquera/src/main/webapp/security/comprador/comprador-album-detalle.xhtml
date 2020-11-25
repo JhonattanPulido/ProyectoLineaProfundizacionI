@@ -86,17 +86,24 @@
                                 <h4>
                                     <h:outputText value="#{compradorAlbumDetalle.album.artista.nombre}" />                            
                                 </h4>
-                                <p:dataTable var="cancion" value="#{albumAdministradorController.album.listaCanciones}">
-
+                                <p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" 
+                                             emptyMessage="No se han agregado canciones">
+                                    <f:facet name="header">
+                                        Canciones agregadas
+                                    </f:facet>
                                     <p:column headerText="Nombre">
-                                        <h:outputText value="#{cancion.nombre}" />
+                                        <h:outputText value="#{cancion.nombre}" />                             ç                                 
                                     </p:column>
-
                                     <p:column headerText="Precio">
-                                        <h:outputText value="#{cancion.precio}" />
-                                    </p:column>
-
-                                </p:dataTable>
+                                        <h:outputText value="$ #{cancion.precio}" />
+                                    </p:column>                                                    
+                                </p:dataTable> 
+                            </div>
+                            <div class="col-lg-12" style="display: flex; flex-flow: row-reverse; margin-bottom: 30px;">
+                                <fieldset>     
+                                    <h:outputText id="precio-total" value="$ #{compradorAlbumDetalle.album.precio}" />
+                                    <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{compradorCarritoController.crearCarrito()}" ajax="true" value="Comprar" update="@form" validateClient="true" />
+                                </fieldset>
                             </div>
                         </div>                                       
                     </div>

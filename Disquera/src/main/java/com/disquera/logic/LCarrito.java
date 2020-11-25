@@ -2,7 +2,6 @@
 package com.disquera.logic;
 
 //Librerias
-import com.disquera.data.DArtista;
 import com.disquera.data.DCarrito;
 import com.disquera.models.Carrito;
 import java.io.Serializable;

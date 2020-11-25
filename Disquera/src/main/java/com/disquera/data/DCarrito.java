@@ -72,7 +72,7 @@ public class DCarrito implements Serializable {
             funcion.setShort(1, carrito.getAlbumId());                          
             funcion.setString(2, carrito.getCanciones());  
             funcion.setDouble(3, carrito.getPrecio());
-            funcion.setBoolean(3, carrito.isEstadoCompra());
+            funcion.setBoolean(4, carrito.isEstadoCompra());
             
             ResultSet respuesta = funcion.executeQuery();                        
             

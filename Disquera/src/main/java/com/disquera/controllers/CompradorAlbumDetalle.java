@@ -4,6 +4,7 @@ package com.disquera.controllers;
 //Librerias
 import com.disquera.logic.LAlbum;
 import com.disquera.models.Album;
+import com.disquera.models.Carrito;
 import java.io.Serializable;
 import java.util.Map;
 import javax.faces.context.FacesContext;
@@ -21,6 +22,8 @@ import javax.inject.Named;
 public class CompradorAlbumDetalle implements Serializable {
 
     private Album album;
+    
+    private Carrito carrito;
 
     public CompradorAlbumDetalle() {
         Map params = FacesContext. getCurrentInstance().getExternalContext().getRequestParameterMap();                  
@@ -35,5 +38,15 @@ public class CompradorAlbumDetalle implements Serializable {
     public void setAlbum(Album album) {
         this.album = album;
     }
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
+    
+    
 
 }
