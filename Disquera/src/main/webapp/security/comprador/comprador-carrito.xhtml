@@ -81,7 +81,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:dataTable var="car" value="#{compradorVenta.listaCarrito}">
+                                                            <p:dataTable var="car" value="#{compradorVenta.listaCarrito}"
+                                                                         rows="10"
+                                                                         paginator="true"
+                                                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                                                         rowsPerPageTemplate="5,10,15"
+                                                                         emptyMessage="No se encontraron compras">
                                                                 <p:column headerText="Album">
                                                                     <h:outputText value="#{car.album.nombre}" />
                                                                 </p:column>
