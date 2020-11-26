@@ -128,7 +128,7 @@ public class DCarrito implements Serializable {
                 JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
                 
                 for (short i = 0; i < JSONCanciones.length(); i++)  
-                    album.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
+                    carrito.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
                 
                 carrito.setAlbum(album);
                 
@@ -142,4 +142,30 @@ public class DCarrito implements Serializable {
         }
     }
     
+    public boolean actualizarEstado() {
+    
+        try {
+            
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            
+            dbContext = DriverManager.getConnection(
+                "jdbc:postgresql://proyecto-turismo-produccion-database.cuw9stbxwsmg.us-east-2.rds.amazonaws.com:5432/disquera",
+                "p_turismo_master",
+                "LCPzVCxRrZtS2BS"    
+            );
+            
+            CallableStatement funcion = dbContext.prepareCall("{ call f_actualizar_carrito() }");
+            
+            ResultSet respuesta = funcion.executeQuery();                        
+            
+            return true;
+            
+        } catch (SQLException ex) {        
+            return false;
+        }                
+    }
 }

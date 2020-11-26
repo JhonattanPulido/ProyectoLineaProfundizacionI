@@ -4,6 +4,7 @@ package com.disquera.controllers;
 //Librerias
 import com.disquera.logic.LAlbum;
 import com.disquera.logic.LCarrito;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Album;
 import com.disquera.models.Cancion;
 import com.disquera.models.Carrito;
@@ -50,11 +51,7 @@ public class CompradorAlbumDetalle implements Serializable {
      * Faces context
      */
     private FacesContext facesContext;      
-    
-    /**
-     * Lista de Carrito almacenados en base de datos
-     */
-    private List<Carrito> listaCarrito;
+   
     
     /**
      * Lista auxiliar de comprar
@@ -70,12 +67,8 @@ public class CompradorAlbumDetalle implements Serializable {
         album = new LAlbum().leerAlbum(Short.parseShort(params.get("albumId").toString())); 
         carrito = new Carrito();  
         listaCanciones = new ArrayList<>();
-        //listaCarrito = new LCarrito().leerCarrito();
-        //estadoCompra = false;
-        //listaAlbumes = new LAlbum().leerAlbum();
     }
-   
-
+    
      /**
      * Crear nuevo carrito   
      */
@@ -101,6 +94,18 @@ public class CompradorAlbumDetalle implements Serializable {
         }                    
     }  
     
+    
+    /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
+    } 
+    
+    //Metodos Set & Get
     public Album getAlbum() {
         return album;
     }
@@ -123,14 +128,6 @@ public class CompradorAlbumDetalle implements Serializable {
 
     public void setEstadoCompra(boolean estadoCompra) {
         this.estadoCompra = estadoCompra;
-    }
-
-    public List<Carrito> getListaCarrito() {
-        return listaCarrito;
-    }
-
-    public void setListaCarrito(List<Carrito> listaCarrito) {
-        this.listaCarrito = listaCarrito;
     }
 
     public List<Album> getListaAlbumes() {

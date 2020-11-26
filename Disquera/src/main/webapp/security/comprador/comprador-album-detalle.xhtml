@@ -38,16 +38,19 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <div class="collapse navbar-collapse" id="navbarResponsives">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="comprador-carrito.xhtml">Carrito</a>
-                            </li> 
-                            <li class="nav-item">
                                 <a class="nav-link" href="comprador-venta.xhtml">Venta
                                     <span class="sr-only">(current)</span>
                                 </a>
-                            </li>                       
+                            </li> 
+                            <li class="nav-item">
+                                <a class="nav-link" href="comprador-carrito.xhtml">Carrito</a>
+                            </li>  
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">Cerrar sesión</a>
+                            </li>                            
                         </ul>
                     </div>
                 </div>
@@ -84,23 +87,13 @@
                         <div class="col-md-6">
                             <div class="left-content">                            
                                 <h4>
+                                    Artista:
                                     <h:outputText value="#{compradorAlbumDetalle.album.artista.nombre}" />                            
                                 </h4>
                                 <h4>
+                                    Nacionalidad:
                                     <h:outputText value="#{compradorAlbumDetalle.album.artista.nacionalidad}" />                            
                                 </h4>
-                                <!--<p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" 
-                                             emptyMessage="No se han agregado canciones">
-                                    <f:facet name="header">
-                                        Canciones agregadas
-                                    </f:facet>
-                                    <p:column headerText="Nombre">
-                                        <h:outputText value="#{cancion.nombre}" />                               
-                                    </p:column>
-                                    <p:column headerText="Precio">
-                                        <h:outputText value="$ #{cancion.precio}" />
-                                    </p:column>                                                    
-                                </p:dataTable> -->
                                 <p:dataTable id="canciones" var="cancion" value="#{compradorAlbumDetalle.album.listaCanciones}" selectionMode="multiple" selection="#{compradorAlbumDetalle.listaCanciones}" rowKey="#{cancion.nombre}">                                    
                                     <p:column headerText="Id">
                                         <h:outputText value="#{cancion.nombre}" />
@@ -112,10 +105,8 @@
                             </div>
                             <div class="col-lg-12" style="display: flex; flex-flow: row-reverse; margin-bottom: 30px;">
                                 <fieldset>     
-
                                     <h:outputText id="precio-total" value="$ #{compradorAlbumDetalle.album.precio}" />
                                     <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{compradorAlbumDetalle.crearCarrito()}" ajax="true" value="Comprar" update="@form" validateClient="true" />
-
                                 </fieldset>
                             </div>
                         </div>                                       

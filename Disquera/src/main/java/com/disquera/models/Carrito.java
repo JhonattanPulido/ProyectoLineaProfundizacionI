@@ -3,6 +3,8 @@ package com.disquera.models;
 
 //Librerias
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -46,8 +48,12 @@ public class Carrito implements Serializable{
     private Album album;  
     
 
+    private List<Cancion> listaCanciones;
+    
     //Constructor
     public Carrito() {
+        precio = 0;
+        listaCanciones = new ArrayList<>();
     }
 
     //Metodos Set & Get
@@ -98,6 +104,18 @@ public class Carrito implements Serializable{
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public List<Cancion> getListaCanciones() {
+        return listaCanciones;
+    }
+
+    public void setListaCanciones(List<Cancion> listaCanciones) {
+        this.listaCanciones = listaCanciones;
+    }
+
+    public boolean isEstadoCompra(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

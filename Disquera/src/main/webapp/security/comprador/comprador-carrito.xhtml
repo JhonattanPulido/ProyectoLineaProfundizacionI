@@ -64,7 +64,7 @@
                     <div class="col-md-12">
                         <div class="filters">
                             <ul>
-                                <li class="active">Albumes-Canciones</li>                                
+                                <li class="active">Carrito de compras</li>                                
                             </ul>
                         </div>
                     </div>
@@ -79,19 +79,33 @@
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <fieldset>
-                                                            <p:dataTable var="car" value="#{compradoAlbumDetalle.listaCarrito}">
+                                                            <p:dataTable var="car" value="#{compradorVenta.listaCarrito}">
                                                                 <p:column headerText="Album">
                                                                     <h:outputText value="#{car.album.nombre}" />
                                                                 </p:column>
                                                                 <p:column headerText="Precio">
                                                                     <h:outputText value="#{car.precio}" />
                                                                 </p:column>
-                                                               <p:column headerText="Descripcion">
-                                                                   <h:outputText value="#{car.album.listaCanciones}" />
-                                                                </p:column>
+                                                                 <p:column headerText="Canciones">
+                                                                     <p:dataTable var="cancion" value="#{car.listaCanciones}">
+                                                                        
+                                                                        <p:column headerText="Nombre">
+                                                                            <h:outputText value="#{cancion.nombre}" />
+                                                                        </p:column>
+
+                                                                        <p:column headerText="Precio">
+                                                                            <h:outputText value="#{cancion.precio}" />
+                                                                        </p:column>
+
+                                                                     </p:dataTable>
+                                                                 </p:column>
                                                             </p:dataTable>
-                                                            
-                                                        </fieldset>                                                
+                                                        </fieldset>  
+                                                        <div>
+                                                            <fieldset>
+                                                                <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{compradorCarrito.actualizarCarrito()}" ajax="true" value="Comprar" update="@form" validateClient="true" />
+                                                            </fieldset>
+                                                        </div>
                                                     </div>
                                                 </div>
 

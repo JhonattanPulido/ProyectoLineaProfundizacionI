@@ -48,5 +48,12 @@ public class LCarrito implements Serializable {
         return listaCarrito;
     }
 
+    /**
+     * Crear carrito
+     * @return true si el estado se cambio
+     */
+    public boolean actualizarCarrito() {
+        return new DCarrito().actualizarEstado();
+    }
     
 }

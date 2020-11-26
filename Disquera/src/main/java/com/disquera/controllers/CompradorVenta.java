@@ -5,11 +5,12 @@
  */
 package com.disquera.controllers;
 
-import com.disquera.logic.LAlbum;
+import com.disquera.logic.LCarrito;
 import com.disquera.models.Album;
+import com.disquera.models.Carrito;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -25,8 +26,15 @@ import javax.inject.Named;
 public class CompradorVenta implements Serializable {
     
     private Album album;
+    
+    /**
+     * Lista de Carrito almacenados en base de datos
+     */
+    private List<Carrito> listaCarrito;
 
     public CompradorVenta() {
+        
+        listaCarrito = new LCarrito().leerCarrito();
         
     }
     
@@ -43,6 +51,15 @@ public class CompradorVenta implements Serializable {
     public void setAlbum(Album album) {
         this.album = album;
     }
-        
+
+    public List<Carrito> getListaCarrito() {
+        return listaCarrito;
+    }
+
+    public void setListaCarrito(List<Carrito> listaCarrito) {
+        this.listaCarrito = listaCarrito;
+    }
+   
+    
         
 }
