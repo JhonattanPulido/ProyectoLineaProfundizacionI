@@ -6,6 +6,7 @@
 package com.disquera.controllers;
 
 import com.disquera.logic.LCarrito;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Album;
 import com.disquera.models.Carrito;
 import java.io.IOException;
@@ -60,6 +61,14 @@ public class CompradorVenta implements Serializable {
         this.listaCarrito = listaCarrito;
     }
    
-    
+        /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
+    } 
         
 }

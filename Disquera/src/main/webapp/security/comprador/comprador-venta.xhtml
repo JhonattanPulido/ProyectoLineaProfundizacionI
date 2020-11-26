@@ -50,7 +50,9 @@
                                 <a class="nav-link" href="comprador-carrito.xhtml">Carrito</a>
                             </li>  
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">Cerrar sesión</a>
+                                <h:form>
+                                    <p:commandButton class="nav-link" action="#{compradorVenta.cerrarSesion()}" value="Cerrar sesión" />
+                                </h:form> 
                             </li>                            
                         </ul>
                     </div>
