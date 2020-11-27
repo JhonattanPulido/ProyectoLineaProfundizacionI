@@ -120,6 +120,10 @@ a.filled-button-compra:hover {
 	background-image: url(../images/venta.jpg);
 }
 
+.products-heading-error {
+	background-image: url(../images/error404.jpg);
+}
+
 .about-heading {
 	background-image: url(../images/about-heading.jpg);
 }
