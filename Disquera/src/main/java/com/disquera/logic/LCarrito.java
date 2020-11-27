@@ -47,6 +47,14 @@ public class LCarrito implements Serializable {
         listaCarrito = new DCarrito().leerCarrito();
         return listaCarrito;
     }
+    
+    /**
+     * Leer todas las compras con el estado de compra en verdadero
+     * @return lista de compras realizadas
+     */
+    public List<Carrito> leerTodoCarrito() {
+        return new DCarrito().leerTodoCarrito();
+    }
 
     /**
      * Crear carrito

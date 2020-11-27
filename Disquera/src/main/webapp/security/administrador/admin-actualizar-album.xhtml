@@ -118,15 +118,8 @@
 
                                                     </fieldset>
                                                 </div>
-
-                                                <div class="col-lg-12" style="display: flex; flex-flow: row-reverse; margin-bottom: 30px;">
-                                                    <fieldset>     
-                                                        <h:outputText id="precio-total" value="$ #{actualizarAlbumAdministrador.album.precio}" />
-                                                        <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{actualizarAlbumAdministrador.agregarCancion()}" ajax="true" value="Actualizar" update="@form" validateClient="true" />
-                                                    </fieldset>
-                                                </div>
-
-                                                <!--<div class="col-lg-12 col-md-12 col-sm-12"  style="display: flex; flex-flow: row;">
+                                                
+                                                <div class="col-lg-12 col-md-12 col-sm-12"  style="display: flex; flex-flow: row;">
 
                                                     <fieldset style="width: 48%; margin-right: 4%;"> 
                                                         <p:inputText id="nombre-cancion" class="form-control" value="#{actualizarAlbumAdministrador.cancion.nombre}" placeholder="Nombre" style="box-shadow: none;" autocomplete="off" />    
@@ -138,11 +131,12 @@
                                                     
                                                 </div>     
 
-                                                <div class="col-lg-12" style="display: flex; flex-flow: row-reverse;">
-                                                    <fieldset>                                                        
-                                                        <p:commandButton class="filled-button" actionListener="#{actualizarAlbumAdministrador.agregarCancion()}" ajax="true" value="Agregar" update="canciones precio-total nombre-cancion precio-cancion" />
+                                                <div class="col-lg-12" style="display: flex; flex-flow: row-reverse; margin-bottom: 30px;">
+                                                    <fieldset>     
+                                                        <h:outputText id="precio-total" value="$ #{actualizarAlbumAdministrador.album.precio}" />
+                                                        <p:commandButton class="filled-button" style="margin-left: 15px;" actionListener="#{actualizarAlbumAdministrador.agregarCancion()}" ajax="true" value="Actualizar" update="@form" validateClient="true" />
                                                     </fieldset>
-                                                </div>-->
+                                                </div>                                                                                               
 
                                             </h:form>
                                         </div>
