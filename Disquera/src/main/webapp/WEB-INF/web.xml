@@ -12,7 +12,6 @@
         <filter-name>restrict</filter-name>
         <url-pattern>/faces/security/*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>
@@ -23,7 +22,6 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
-    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -41,4 +39,8 @@
     <welcome-file-list>
         <welcome-file>faces/iniciar-sesion.xhtml</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errores/404.xhtml</location>
+    </error-page>
 </web-app>
