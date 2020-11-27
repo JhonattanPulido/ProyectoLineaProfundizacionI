@@ -1,6 +1,7 @@
 // Paquetes
 package com.disquera.controllers;
 import com.disquera.logic.LAlbum;
+import com.disquera.logic.LIniciarSesion;
 
 // Modelos
 import com.disquera.models.Album;
@@ -128,6 +129,16 @@ public class ActualizarAlbumAdministrador implements Serializable {
             album.setPrecio(Math.round(album.getPrecio() - promedio)); // Aqui ya esta el precio final 
         }                       
     }
+    
+    /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
+    }  
     
     // Métodos Set & Get
     

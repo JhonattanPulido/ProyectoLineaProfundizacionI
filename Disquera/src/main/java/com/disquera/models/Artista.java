@@ -29,7 +29,7 @@ public class Artista implements Serializable {
     
     /**
      * Fecha de nacimiento del artista
-     */    
+     */        
     private Date fechaNacimiento;
     
     /**
@@ -77,7 +77,7 @@ public class Artista implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
+    }    
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
@@ -85,7 +85,7 @@ public class Artista implements Serializable {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
-    }
+    }    
 
     public String getNacionalidad() {
         return nacionalidad;
@@ -118,4 +118,6 @@ public class Artista implements Serializable {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }   
+    
+    
 }

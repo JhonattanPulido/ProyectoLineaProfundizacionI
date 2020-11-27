@@ -9,6 +9,7 @@ import com.disquera.models.Genero;
 import java.io.Serializable;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,7 +79,7 @@ public class DArtista implements Serializable {
             CallableStatement funcion = dbContext.prepareCall("{ call f_crear_artista(?,?,?,?) }");
             funcion.setString(1, artista.getNombre());
             funcion.setString(2, artista.getNacionalidad());              
-            //funcion.setDate(3, new java.sql.Date(artista.getFechaNacimiento().getTime()));               
+            //funcion.setDate(3, (Date) artista.getFechaNacimiento());               
             funcion.setShort(3, artista.getGeneroId());
             funcion.setString(4, artista.getImagen());            
             
@@ -218,6 +219,7 @@ public class DArtista implements Serializable {
             funcion.setString(2, artista.getNombre());
             funcion.setString(3, artista.getNacionalidad());              
             funcion.setShort(4, artista.getGeneroId());
+            //funcion.setDate(5, (Date) artista.getFechaNacimiento());
             funcion.setString(5, artista.getImagen());
             
             ResultSet respuesta = funcion.executeQuery();                        

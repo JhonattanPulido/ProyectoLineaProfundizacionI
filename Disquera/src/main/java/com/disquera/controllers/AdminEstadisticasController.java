@@ -3,12 +3,15 @@ package com.disquera.controllers;
 
 // Librerías
 import com.disquera.logic.LCarrito;
+import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Album;
 import com.disquera.models.Carrito;
 import com.disquera.models.Grafico;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import org.primefaces.model.chart.PieChartModel;
@@ -44,6 +47,11 @@ public class AdminEstadisticasController implements Serializable {
      * Modelo del gráfico
      */
     private PieChartModel torta;
+    
+    /**
+     * Faces context
+     */
+    private FacesContext facesContext; 
     
     /**
      * Constructor del controlador
@@ -116,6 +124,16 @@ public class AdminEstadisticasController implements Serializable {
         torta.setShowDataLabels(true);
         torta.setDiameter(150);
     }
+    
+    /**
+     * Cerrar sesión del usuario     
+     * @throws java.io.IOException
+     */
+    public void cerrarSesion() throws IOException {
+        new LIniciarSesion().cerrarSesion();
+        facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("faces/iniciar-sesion.xhtml");
+    }  
     
     // Métodos Set & Get
 

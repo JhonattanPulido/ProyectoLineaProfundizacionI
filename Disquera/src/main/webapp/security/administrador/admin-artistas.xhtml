@@ -40,7 +40,7 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Artistas
+                                <a class="nav-link" href="admin-artistas.xhtml">Artistas
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li> 
@@ -106,15 +106,7 @@
                                                                          rowsPerPageTemplate="5,10,15"
                                                                          emptyMessage="No se encontraron artistas"> 
 
-                                                                <p:ajax event="cellEdit" listener="#{artistasAdministradorController.onCellEdit}" update=":lista-artistas:growl" />
-
-                                                                <!-- Id --> 
-                                                                <p:column headerText="Id">
-                                                                    <p:cellEditor>
-                                                                        <f:facet name="output"><h:outputText value="#{artista.id}" /></f:facet>
-                                                                        <f:facet name="input"><p:inputText id="modelInput" value="#{artista.id}" style="width:100%" disabled="true"/></f:facet>
-                                                                    </p:cellEditor>
-                                                                </p:column>
+                                                                <p:ajax event="cellEdit" listener="#{artistasAdministradorController.onCellEdit}" update=":lista-artistas:growl" />                                                                
 
                                                                 <!-- Nombre -->
                                                                 <p:column headerText="Nombre">
@@ -146,7 +138,7 @@
                                                                             </h:selectOneMenu>
                                                                         </f:facet>
                                                                     </p:cellEditor>
-                                                                </p:column>
+                                                                </p:column>                                                                                                                                
 
                                                                 <!-- Imagen -->
                                                                 <p:column headerText="Imagen">
@@ -213,7 +205,9 @@
                                                         <fieldset style="width: 48%;">
 
                                                             <!-- Fecha nacimiento -->
-                                                            <p:inputText type="date" id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true" requiredMessage="Fecha de nacimiento: Ingrese una fecha" disabled="true" />
+                                                            <p:inputText id="fecha-nacimiento" class="form-control" value="#{artistasAdministradorController.artista.fechaNacimiento}" placeholder="Fecha nacimiento" style="box-shadow: none;" autocomplete="off" required="true" requiredMessage="Fecha de nacimiento: Ingrese una fecha" disabled="true">
+                                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                            </p:inputText>
 
                                                         </fieldset>                                                                                                                                                                                      
                                                     </div>
