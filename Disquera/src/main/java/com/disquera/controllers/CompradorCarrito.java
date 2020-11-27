@@ -10,6 +10,7 @@ import com.disquera.logic.LIniciarSesion;
 import com.disquera.models.Carrito;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -33,9 +34,9 @@ public class CompradorCarrito implements Serializable {
     
     public boolean actualizarCarrito(){
         if (new LCarrito().actualizarCarrito())
-                System.out.println("Se actualizo");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrito", "Se compro exitosamente"));
             else
-                System.out.println("No actualizado");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carrito", "No se pudo comprar"));
         return false;
     }
     

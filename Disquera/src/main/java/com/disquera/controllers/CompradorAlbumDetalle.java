@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -88,9 +89,9 @@ public class CompradorAlbumDetalle implements Serializable {
             carrito.setCanciones(JSONCanciones.toString());
             
             if (new LCarrito().crearCarrito(carrito))
-                System.out.println("Creado");
+                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrito", "Se añadio al carrito"));
             else
-                System.out.println("No creado");
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carrito", "No se pudo añadir al carrito"));
         }                    
     }  
     
