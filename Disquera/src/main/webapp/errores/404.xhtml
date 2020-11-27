@@ -3,11 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>ERROR 404</title>
+        <title>Error 404 | No se encontró la página</title>
+        <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            
+            html, body {
+                display: flex;
+                width: 100%;
+                height: 100%;      
+                justify-content: center;
+                align-items: center;
+            }
+            
+            img {
+                display: flex;               
+                height: 100%;
+                object-fit: cover;
+            }
+        </style>
     </h:head>
 
-    <h:body style="background-image: url('assets/images/error404.jpg');">
-        Esta es la página de 404 
+    <h:body>
+        <img src="https://seoalive.com/wp-content/uploads/2019/09/ejemplo-http-404-900x563.png" />
     </h:body>
 </html>
 
