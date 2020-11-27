@@ -89,6 +89,8 @@ public class ArtistasAdministradorController implements Serializable {
         listaNacionalidades.add("Estadounidense");
         listaNacionalidades.add("Francesa");
         listaNacionalidades.add("Española");
+        listaNacionalidades.add("Venezolana");
+        listaNacionalidades.add("Puerto riqueña");
     }
     
     // Métodos

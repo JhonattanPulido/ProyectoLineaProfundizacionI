@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  *
@@ -138,6 +139,62 @@ public class DCarrito implements Serializable {
             return listaCarrito;
             
         } catch (SQLException ex) {        
+            return null;
+        }
+    }
+    
+    /**
+     * Leer todas las compras con el estado de compra en verdadero
+     * @return lista de compras realizadas
+     */
+    public List<Carrito> leerTodoCarrito() {
+    
+        try {
+        
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println(e);
+            }
+            
+            dbContext = DriverManager.getConnection(
+                "jdbc:postgresql://proyecto-turismo-produccion-database.cuw9stbxwsmg.us-east-2.rds.amazonaws.com:5432/disquera",
+                "p_turismo_master",
+                "LCPzVCxRrZtS2BS"    
+            );
+            
+            CallableStatement funcion = dbContext.prepareCall("{ call f_leer_todo_carrito() }");
+            
+            ResultSet respuesta = funcion.executeQuery();
+            
+            listaCarrito = new ArrayList<>();
+            
+            while (respuesta.next()) {
+            
+                carrito = new Carrito();                
+                carrito.setId(respuesta.getShort("id"));
+                carrito.setAlbumId(respuesta.getShort("album_id"));               
+                //carrito.setCanciones(respuesta.getString("canciones"));   
+                carrito.setPrecio(respuesta.getDouble("precio"));
+                carrito.setEstadoCompra(respuesta.getBoolean("estado_compra"));
+                
+                album = new Album();
+                album.setId(respuesta.getShort("album_id"));
+                album.setNombre(respuesta.getString("album_nombre"));                
+                
+                JSONArray JSONCanciones = new JSONArray(respuesta.getString("canciones"));
+                
+                for (short i = 0; i < JSONCanciones.length(); i++)  
+                    carrito.getListaCanciones().add(new Cancion(JSONCanciones.getJSONObject(i).getString("nombre"), JSONCanciones.getJSONObject(i).getDouble("precio")));                
+                
+                carrito.setAlbum(album);
+                
+                listaCarrito.add(carrito);
+            }
+            
+            return listaCarrito;
+            
+        } catch (SQLException | JSONException ex) {            
             return null;
         }
     }

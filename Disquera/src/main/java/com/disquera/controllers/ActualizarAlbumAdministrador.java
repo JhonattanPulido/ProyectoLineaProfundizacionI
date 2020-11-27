@@ -80,7 +80,10 @@ public class ActualizarAlbumAdministrador implements Serializable {
                 break;                            
         }
                 
-        album.getListaCanciones().remove(album.getListaCanciones().size() - 1);
+        for (short i = 0; i < album.getListaCanciones().size(); i++)
+            if (album.getListaCanciones().get(i).getNombre() == null || album.getListaCanciones().get(i).getPrecio() <= 0)
+                album.getListaCanciones().remove(i);        
+        
         calcularPrecioAlbum();
         
         if (new LAlbum().actualizarCancionesAlbum(album, new JSONArray(album.getListaCanciones()).toString())) {            
